@@ -1,4 +1,4 @@
-package com.sportstracking.strackify;
+package com.sportstracking.strackify.authentication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +21,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.sportstracking.strackify.MainActivity;
+import com.sportstracking.strackify.R;
+import com.sportstracking.strackify.SportSelection;
 
 public class SignInActivity extends AppCompatActivity{
 
@@ -142,7 +145,7 @@ public class SignInActivity extends AppCompatActivity{
 
     private void updateUI(FirebaseUser user){
         if(user!=null){
-            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+            Intent intent = new Intent(SignInActivity.this, SportSelection.class);
             startActivity(intent);
         }
         else{
