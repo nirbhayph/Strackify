@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "478533617014",
+    "firebase_url": "https://strackify.firebaseio.com",
+    "project_id": "strackify",
+    "storage_bucket": "strackify.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478533617014:android:8e8d9f55dcba2007ea6657",
+        "android_client_info": {
+          "package_name": "com.sportstracking.strackify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478533617014-jajiifhoda932r458ssam5khdl3dki85.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sportstracking.strackify",
+            "certificate_hash": "0e392ef2764294fda0f62ff4381a501a5d1119b2"
+          }
+        },
+        {
+          "client_id": "478533617014-thu4hceflrrhjnfc8ued94322pg5dji6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNB0FiTeLVPAJVeb7qOCMS91afiCM0d9U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "478533617014-thu4hceflrrhjnfc8ued94322pg5dji6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
