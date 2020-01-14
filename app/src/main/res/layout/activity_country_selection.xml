@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/headerText"
-        android:text="Select a sport \n of your interest!"
+        android:text="Select a country \nyou follow!"
         android:gravity="center"
         android:textColor="@color/white"
         android:textStyle="normal"
@@ -22,7 +22,7 @@
         android:background="@color/colorPrimary"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/sports_selection_recycler_view"
+        android:id="@+id/country_selection_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 </LinearLayout>

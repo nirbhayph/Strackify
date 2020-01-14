@@ -20,8 +20,13 @@
         </activity>
         <activity android:name=".authentication.SignInActivity"/>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".SportSelection"/>
-
+        <activity
+            android:name=".SportSelection"
+            android:theme="@style/FullScreenAppTheme"/>
+        <activity
+            android:name=".CountrySelection"
+            android:parentActivityName=".SportSelection"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

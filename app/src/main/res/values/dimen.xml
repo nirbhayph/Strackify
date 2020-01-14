@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="buttonPadding">20dp</dimen>
+    <dimen name="headerText">25dp</dimen>
+    <dimen name="verticalViewMargin">20dp</dimen>
 </resources>

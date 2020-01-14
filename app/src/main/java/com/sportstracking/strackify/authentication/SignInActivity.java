@@ -21,7 +21,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.sportstracking.strackify.MainActivity;
 import com.sportstracking.strackify.R;
 import com.sportstracking.strackify.SportSelection;
 
