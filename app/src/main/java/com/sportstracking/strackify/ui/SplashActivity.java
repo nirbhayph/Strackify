@@ -1,4 +1,4 @@
-package com.sportstracking.strackify;
+package com.sportstracking.strackify.ui;
 
 import android.content.Intent;
 import android.os.Bundle;

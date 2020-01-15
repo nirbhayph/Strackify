@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Strackify</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Enter a keyword ... </string>
+    <string name="title_activity_home">Home</string>
+    <string name="change_favorite">Swap Favorite</string>
+    <string name="history">Past Events</string>
+    <string name="upcoming">Upcoming Events</string>
+    <string name="about_team">About Team</string>
+    <string name="user_profile">Profile</string>
 </resources>

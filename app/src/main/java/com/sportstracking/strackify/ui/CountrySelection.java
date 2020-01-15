@@ -1,15 +1,17 @@
-package com.sportstracking.strackify;
+package com.sportstracking.strackify.ui;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
+import android.view.Menu;
+import android.view.MenuInflater;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sportstracking.strackify.R;
 import com.sportstracking.strackify.adapter.CountrySelectionAdapter;
 import com.sportstracking.strackify.model.Country;
 import com.sportstracking.strackify.utility.Constants;
@@ -26,20 +28,20 @@ public class CountrySelection extends AppCompatActivity {
     private RecyclerView countrySelectionRecyclerView;
     private CountrySelectionAdapter countrySelectionAdapter;
     private VolleyService volleyService;
+    private String selectedSport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSelectedSport();
         setContentView(R.layout.activity_country_selection);
-        setupContentView();
         setupDataView();
         getCountries();
     }
 
-    private void setupContentView(){
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
+    private void getSelectedSport(){
+        if(getIntent().hasExtra(Constants.SPORTS_SELECTION)){
+            selectedSport = getIntent().getStringExtra(Constants.SPORTS_SELECTION);
         }
     }
 
@@ -69,7 +71,7 @@ public class CountrySelection extends AppCompatActivity {
                 country.setCountryName(countryName);
                 countries.add(country);
             }
-            countrySelectionAdapter = new CountrySelectionAdapter(countries);
+            countrySelectionAdapter = new CountrySelectionAdapter(this, countries, selectedSport);
             countrySelectionRecyclerView.setAdapter(countrySelectionAdapter);
         }
         catch (JSONException e){
@@ -79,13 +81,32 @@ public class CountrySelection extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
 
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(countrySelectionAdapter != null){
+                    countrySelectionAdapter.getFilter().filter(newText);
+                }
+                return false;
+            }
+        });
+
+        return true;
+    }
 }

@@ -1,19 +1,28 @@
 package com.sportstracking.strackify.adapter;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sportstracking.strackify.R;
+import com.sportstracking.strackify.ui.TeamSelection;
 import com.sportstracking.strackify.model.Country;
+import com.sportstracking.strackify.utility.Constants;
 
 import java.util.ArrayList;
 
-public class CountrySelectionAdapter extends RecyclerView.Adapter<CountrySelectionAdapter.MyViewHolder> {
+public class CountrySelectionAdapter extends RecyclerView.Adapter<CountrySelectionAdapter.MyViewHolder> implements Filterable {
     private ArrayList<Country> countriesData;
+    private ArrayList<Country> countriesDataComplete;
+    private Activity activity;
+    private String selectedSport;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView countryNameView;
@@ -23,8 +32,11 @@ public class CountrySelectionAdapter extends RecyclerView.Adapter<CountrySelecti
         }
     }
 
-    public CountrySelectionAdapter(ArrayList<Country> countriesData) {
+    public CountrySelectionAdapter(Activity activity, ArrayList<Country> countriesData, String selectedSport) {
+        this.activity = activity;
         this.countriesData = countriesData;
+        this.countriesDataComplete = new ArrayList<>(countriesData);
+        this.selectedSport = selectedSport;
     }
 
     @Override
@@ -37,12 +49,55 @@ public class CountrySelectionAdapter extends RecyclerView.Adapter<CountrySelecti
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.countryNameView.setText(countriesData.get(position).getCountryName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, TeamSelection.class);
+                intent.putExtra(Constants.SPORTS_SELECTION, selectedSport);
+                intent.putExtra(Constants.COUNTRIES_SELECTION, countriesData.get(position).getCountryName());
+                activity.startActivity(intent);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return countriesData.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<Country> filteredCountriesData = new ArrayList<>();
+            if(constraint == null || constraint.length()==0){
+                filteredCountriesData.addAll(countriesDataComplete);
+            }
+            else{
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for(Country country : countriesDataComplete){
+                    if(country.getCountryName().toLowerCase().contains(filterPattern) || country.getCountryCode().toLowerCase().contains(filterPattern)){
+                        filteredCountriesData.add(country);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredCountriesData;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            countriesData.clear();
+            countriesData.addAll((ArrayList<Country>) results.values);
+            notifyDataSetChanged();
+        }
+    };
 }

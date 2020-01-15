@@ -2,7 +2,6 @@ package com.sportstracking.strackify.utility;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -13,8 +12,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.sportstracking.strackify.CountrySelection;
-import com.sportstracking.strackify.SportSelection;
+import com.sportstracking.strackify.ui.CountrySelection;
+import com.sportstracking.strackify.ui.SportSelection;
+import com.sportstracking.strackify.ui.TeamSelection;
 
 import org.json.JSONObject;
 
@@ -73,9 +73,9 @@ public class VolleyService {
         public void onErrorResponse(VolleyError error) {
             if (error instanceof NetworkError) {
                 Toast.makeText(activity.getApplicationContext(), "No Network Coverage Available!", Toast.LENGTH_LONG).show();
-            } else {
+            } /*else {
                 Toast.makeText(activity.getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
-            }
+            }*/
         }
     };
 
@@ -89,6 +89,11 @@ public class VolleyService {
             case Constants.COUNTRIES_SELECTION: {
                 CountrySelection countrySelection = (CountrySelection) activity;
                 countrySelection.updateUI(response);
+                break;
+            }
+            case Constants.TEAMS_SELECTION: {
+                TeamSelection teamSelection = (TeamSelection) activity;
+                teamSelection.updateUI(response);
                 break;
             }
         }

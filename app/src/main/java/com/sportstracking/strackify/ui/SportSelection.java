@@ -1,14 +1,11 @@
-package com.sportstracking.strackify;
+package com.sportstracking.strackify.ui;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sportstracking.strackify.R;
 import com.sportstracking.strackify.adapter.SportSelectionAdapter;
 import com.sportstracking.strackify.model.Sport;
 import com.sportstracking.strackify.utility.Constants;
@@ -44,12 +41,6 @@ public class SportSelection extends AppCompatActivity {
     private void getSports(){
         volleyService = new VolleyService(this, Constants.SPORTS_SELECTION);
         volleyService.makeRequest(Constants.ALL_SPORTS);
-        //getImage(volleyService);
-    }
-
-    private void getImage(VolleyService volleyService){
-        ImageView imageView = findViewById(R.id.imageToGet);
-        volleyService.makeImageRequest("https://images.unsplash.com/photo-1578730171162-7242d0e2f2e9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80", imageView);
     }
 
     public void updateUI(JSONObject response){
