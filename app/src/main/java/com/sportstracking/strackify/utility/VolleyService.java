@@ -1,6 +1,7 @@
 package com.sportstracking.strackify.utility;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,6 +16,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.sportstracking.strackify.ui.CountrySelection;
 import com.sportstracking.strackify.ui.SportSelection;
 import com.sportstracking.strackify.ui.TeamSelection;
+import com.sportstracking.strackify.ui.pastevents.PastEventsViewModel;
+import com.sportstracking.strackify.ui.upcomingevents.UpcomingEventsViewModel;
 
 import org.json.JSONObject;
 
@@ -22,14 +25,23 @@ public class VolleyService {
 
     Activity activity;
     String screenName;
+    Object reference;
+    Context context;
 
     public VolleyService(Activity activity, String screenName){
         this.activity = activity;
         this.screenName= screenName;
+        this.context = activity.getApplicationContext();
+    }
+
+    public VolleyService(Object reference, String screenName, Context context){
+        this.reference = reference;
+        this.screenName= screenName;
+        this.context = context;
     }
 
     public void makeRequest(String url){
-        SingletonRequestQueue singletonRequestQueue = SingletonRequestQueue.getInstance(activity.getApplicationContext());
+        SingletonRequestQueue singletonRequestQueue = SingletonRequestQueue.getInstance(context);
         JsonObjectRequest
                 jsonObjectRequest
                 = new JsonObjectRequest(
@@ -53,7 +65,7 @@ public class VolleyService {
     }
 
     public void makeImageRequest(String imageUrl, final ImageView imageView) {
-        SingletonRequestQueue singletonRequestQueue = SingletonRequestQueue.getInstance(activity.getApplicationContext());
+        SingletonRequestQueue singletonRequestQueue = SingletonRequestQueue.getInstance(context);
         ImageRequest imageRequest = new ImageRequest(imageUrl, new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
@@ -72,9 +84,9 @@ public class VolleyService {
         @Override
         public void onErrorResponse(VolleyError error) {
             if (error instanceof NetworkError) {
-                Toast.makeText(activity.getApplicationContext(), "No Network Coverage Available!", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "No Network Coverage Available!", Toast.LENGTH_LONG).show();
             } /*else {
-                Toast.makeText(activity.getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
             }*/
         }
     };
@@ -95,6 +107,15 @@ public class VolleyService {
                 TeamSelection teamSelection = (TeamSelection) activity;
                 teamSelection.updateUI(response);
                 break;
+            }
+            case Constants.PAST_EVENTS_DISPLAY: {
+                PastEventsViewModel pastEventsViewModel = (PastEventsViewModel) reference;
+                pastEventsViewModel.updatePastEvents(response);
+                break;
+            }
+            case Constants.UPCOMING_EVENTS_DISPLAY: {
+                UpcomingEventsViewModel upcomingEventsViewModel = (UpcomingEventsViewModel) reference;
+                upcomingEventsViewModel.updateUpcomingEvents(response);
             }
         }
     }

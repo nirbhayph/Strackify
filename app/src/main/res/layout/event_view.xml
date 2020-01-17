@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/team_card"
+        android:id="@+id/event_card"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,13 +20,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <ImageView
-                android:id="@+id/teamThumb"
+                android:id="@+id/eventThumb"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:scaleType="fitCenter"
                 android:layout_height="210dp"/>
             <TextView
-                android:id="@+id/teamName"
+                android:id="@+id/eventName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/colorPrimaryDark"
@@ -35,7 +35,7 @@
                 android:paddingHorizontal="16dp"
                 />
             <TextView
-                android:id="@+id/teamCountry"
+                android:id="@+id/eventDate"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/colorPrimary"
@@ -44,7 +44,7 @@
                 android:paddingHorizontal="16dp"
                 />
             <TextView
-                android:id="@+id/teamDescription"
+                android:id="@+id/eventLeague"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/gray"

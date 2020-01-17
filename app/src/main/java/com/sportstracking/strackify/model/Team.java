@@ -23,6 +23,16 @@ public class Team {
     private String teamJersey;
     private String teamLogo;
     private String youtube;
+    private String teamCountry;
+
+    public String getTeamCountry() {
+        return teamCountry;
+    }
+
+    public void setTeamCountry(String teamCountry) {
+        this.teamCountry = teamCountry;
+    }
+
 
     public String getTeamBanner() {
         return teamBanner;

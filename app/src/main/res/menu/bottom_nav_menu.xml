@@ -2,17 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_past_events"
         android:icon="@drawable/baseline_history_24"
         android:title="@string/history" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_upcoming_events"
+        android:icon="@drawable/baseline_sports_volleyball_24"
+        android:title="@string/upcoming" />
+
+    <item
+        android:id="@+id/navigation_about_team"
         android:icon="@drawable/baseline_menu_book_24"
         android:title="@string/about_team" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_change_favorite"
         android:icon="@drawable/baseline_swap_horiz_24"
         android:title="@string/change_favorite" />
 

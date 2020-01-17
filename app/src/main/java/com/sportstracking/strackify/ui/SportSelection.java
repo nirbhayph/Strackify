@@ -1,8 +1,10 @@
 package com.sportstracking.strackify.ui;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sportstracking.strackify.R;
@@ -34,14 +36,15 @@ public class SportSelection extends AppCompatActivity {
         sportSelectionRecyclerView = findViewById(R.id.sports_selection_recycler_view);
         sportSelectionRecyclerView.setHasFixedSize(true);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-        sportSelectionRecyclerView.setLayoutManager(layoutManager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        sportSelectionRecyclerView.setLayoutManager(gridLayoutManager);
     }
 
     private void getSports(){
         volleyService = new VolleyService(this, Constants.SPORTS_SELECTION);
         volleyService.makeRequest(Constants.ALL_SPORTS);
     }
+
 
     public void updateUI(JSONObject response){
         ArrayList<Sport> sports = new ArrayList<Sport>();
