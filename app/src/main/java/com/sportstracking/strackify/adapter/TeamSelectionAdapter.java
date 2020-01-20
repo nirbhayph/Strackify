@@ -170,9 +170,14 @@ public class TeamSelectionAdapter extends RecyclerView.Adapter<TeamSelectionAdap
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            teamsData.clear();
-            teamsData.addAll((ArrayList<Team>) results.values);
-            notifyDataSetChanged();
+            try {
+                teamsData.clear();
+                teamsData.addAll((ArrayList<Team>) results.values);
+                notifyDataSetChanged();
+            }
+            catch(Exception e){
+                Toast.makeText(activity.getApplicationContext(), "Nothing to search!", Toast.LENGTH_SHORT);
+            }
         }
     };
 

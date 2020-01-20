@@ -15,6 +15,7 @@ import com.sportstracking.strackify.R;
 import com.sportstracking.strackify.ui.TeamSelection;
 import com.sportstracking.strackify.model.Country;
 import com.sportstracking.strackify.utility.Constants;
+import com.vanniktech.emoji.EmojiTextView;
 
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ public class CountrySelectionAdapter extends RecyclerView.Adapter<CountrySelecti
     private String selectedSport;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView countryNameView;
+        public EmojiTextView countryNameView;
         public MyViewHolder(View v) {
             super(v);
             countryNameView = v.findViewById(R.id.countryName);
@@ -50,7 +51,7 @@ public class CountrySelectionAdapter extends RecyclerView.Adapter<CountrySelecti
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.countryNameView.setText(countriesData.get(position).getCountryName());
+        holder.countryNameView.setText(" " + countriesData.get(position).getCountryEmoji() +"  "+ countriesData.get(position).getCountryName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

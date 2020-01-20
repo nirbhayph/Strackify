@@ -211,7 +211,11 @@ public class TeamSelection extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                teamSelectionAdapter.getFilter().filter(newText);
+                try {
+                    teamSelectionAdapter.getFilter().filter(newText);
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(),"Nothing to search!", Toast.LENGTH_SHORT);
+                }
                 return false;
             }
         });

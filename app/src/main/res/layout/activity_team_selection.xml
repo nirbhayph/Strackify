@@ -34,7 +34,7 @@
                 android:textSize="@dimen/header_text"
                 android:text="@string/favorites_text"
                 android:gravity="left|center_vertical"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_spacing"
                 android:layout_marginTop="@dimen/vertical_separator_margin"
                 android:textColor="@color/textColor"
                 android:textStyle="bold"/>
@@ -64,12 +64,12 @@
         android:gravity="left"
         android:textColor="@color/textColor"
         android:layout_marginTop="@dimen/vertical_view_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_spacing"
         android:textStyle="bold"
         />
 
         <TextView
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_spacing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/secondaryTextColor"

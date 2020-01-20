@@ -1,4 +1,4 @@
-package com.sportstracking.strackify.ui.changefavorite;
+package com.sportstracking.strackify.ui.settings;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,26 +8,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ShareCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.sportstracking.strackify.R;
-import com.sportstracking.strackify.model.PastEvent;
+import com.sportstracking.strackify.authentication.SignInActivity;
+import com.sportstracking.strackify.ui.IntroActivity;
 import com.sportstracking.strackify.ui.SportSelection;
-import com.sportstracking.strackify.ui.TeamSelection;
 import com.sportstracking.strackify.utility.Constants;
 import com.sportstracking.strackify.utility.VolleyService;
-
-import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -57,6 +52,8 @@ public class SettingsFragment extends Fragment {
         setupContributions();
         setupAcknowledgments();
         setupSharing();
+        setupShowHelper();
+        setupLogout();
     }
 
     private void setupProfileDetails(){
@@ -148,4 +145,31 @@ public class SettingsFragment extends Fragment {
             }
         });
     }
+
+    private void setupLogout(){
+        TextView logout = root.findViewById(R.id.logout);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SignInActivity.class);
+                intent.putExtra(Constants.SIGN_OUT, Constants.SIGN_OUT);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void setupShowHelper(){
+        TextView showHelper = root.findViewById(R.id.showHelper);
+
+        showHelper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), IntroActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+
 }

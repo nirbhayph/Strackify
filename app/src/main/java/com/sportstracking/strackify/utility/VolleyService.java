@@ -3,9 +3,12 @@ package com.sportstracking.strackify.utility;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.volley.NetworkError;
 import com.android.volley.Request;
@@ -16,7 +19,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.sportstracking.strackify.ui.CountrySelection;
 import com.sportstracking.strackify.ui.SportSelection;
 import com.sportstracking.strackify.ui.TeamSelection;
-import com.sportstracking.strackify.ui.changefavorite.SettingsViewModel;
 import com.sportstracking.strackify.ui.pastevents.PastEventsViewModel;
 import com.sportstracking.strackify.ui.upcomingevents.UpcomingEventsViewModel;
 
@@ -73,6 +75,23 @@ public class VolleyService {
 
                 if (response != null) {
                     imageView.setImageBitmap(response);
+                }
+
+            }
+        }, ViewGroup.LayoutParams.MATCH_PARENT+1, ViewGroup.LayoutParams.MATCH_PARENT+1, ImageView.ScaleType.CENTER_CROP, Bitmap.Config.ARGB_8888, errorListener);
+
+        singletonRequestQueue.getRequestQueue().add(imageRequest);
+    }
+
+    public void makeImageRequest(String imageUrl, final ConstraintLayout layout) {
+        SingletonRequestQueue singletonRequestQueue = SingletonRequestQueue.getInstance(context);
+        ImageRequest imageRequest = new ImageRequest(imageUrl, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+
+                if (response != null) {
+                    BitmapDrawable background = new BitmapDrawable(context.getResources(), response);
+                    layout.setBackground(background);
                 }
 
             }

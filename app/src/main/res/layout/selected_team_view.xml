@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Author - Nirbhay Ashok Pherwani
+Email - pherwani37@gmail.com
+Profile - https://nirbhay.me
+
+Used to show cards for populating the team selection activity's selected favorites' recycler view.
+You can view the team name, team logo which uses a library circle image view. -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
-    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-    android:layout_gravity="center_horizontal">
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginHorizontal="@dimen/activity_horizontal_spacing"
+    android:layout_marginTop="@dimen/activity_vertical_spacing"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/teamThumb"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:elevation="2dp"
+        android:layout_width="@dimen/thumb_circle_dims"
+        android:layout_height="@dimen/thumb_circle_dims"
         android:background="@color/white"
-        app:civ_border_width="1dp"
-        app:civ_border_color="@color/colorPrimary"/>
+        android:elevation="@dimen/team_elevation"
+        app:civ_border_color="@color/colorPrimary"
+        app:civ_border_width="@dimen/team_border" />
 
     <TextView
         android:id="@+id/teamName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/textColor"
-        android:gravity="center"
         android:drawableRight="@drawable/round_remove_circle_24"
-        android:drawablePadding="5dp"
+        android:drawablePadding="@dimen/custom_padding"
         android:drawableTint="@color/colorAccent"
-        android:textSize="@dimen/normal_text_size"
-        android:padding="5dp"/>
-
+        android:gravity="center"
+        android:padding="@dimen/custom_padding"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/normal_text_size" />
 </LinearLayout>

@@ -14,8 +14,10 @@
         <activity
             android:name=".ui.Home"
             android:label="@string/title_activity_home"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme"></activity>
-        <activity android:name=".ui.SplashActivity">
+        <activity android:name=".ui.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,12 +26,19 @@
         </activity>
         <activity
             android:name=".authentication.SignInActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/FullScreenAppTheme"/>
         <activity
             android:name=".ui.SportSelection"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenAppTheme" />
+        <activity
+            android:name=".ui.IntroActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/FullScreenAppTheme" />
         <activity
             android:name=".ui.CountrySelection"
+            android:screenOrientation="portrait"
             android:parentActivityName=".ui.SportSelection"
             android:theme="@style/AppTheme">
             <meta-data
@@ -38,6 +47,7 @@
         </activity>
         <activity
             android:name=".ui.TeamSelection"
+            android:screenOrientation="portrait"
             android:parentActivityName=".ui.CountrySelection"
             android:theme="@style/AppTheme">
             <meta-data

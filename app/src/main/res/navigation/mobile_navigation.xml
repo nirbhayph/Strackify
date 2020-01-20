@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/navigation_change_favorite"
-        android:name="com.sportstracking.strackify.ui.changefavorite.SettingsFragment"
+        android:name="com.sportstracking.strackify.ui.settings.SettingsFragment"
         android:label="@string/settings_fragment"
         tools:layout="@layout/fragment_settings" />
 

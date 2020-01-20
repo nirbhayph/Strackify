@@ -76,7 +76,7 @@ public class AboutTeamFragment extends Fragment {
         LinearLayoutManager layoutManagerFavorites = new GridLayoutManager(getActivity().getApplicationContext(), 2);
         favoriteTeamsRecyclerView.setLayoutManager(layoutManagerFavorites);
 
-        layout = root.findViewById(R.id.about_team);
+        layout = root.findViewById(R.id.aboutTeam);
         switchToFavButton = root.findViewById(R.id.switchToFav);
         switchToFavButton.setOnClickListener(new View.OnClickListener() {
             @Override

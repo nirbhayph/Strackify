@@ -26,4 +26,6 @@ public class Constants {
     public static final String SIGN_IN_EMAIL = "SIGN_IN_EMAIL";
     public static final String SIGN_IN_NAME = "SIGN_IN_NAME";
     public static final String SIGN_IN_PROFILE_IMAGE = "SIGN_IN_PROFILE_IMAGE";
+    public static final String INTRO_VISITED = "INTRO_VISITED";
+    public static final String SIGN_OUT = "SIGN_OUT";
 }

@@ -1,27 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_height="match_parent"
+<!--
+Author - Nirbhay Ashok Pherwani
+Email - pherwani37@gmail.com
+Profile - https://nirbhay.me
+
+Country selection activity which includes the recycler view for populating countries with their flags.
+Users can search for countries directly too -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
     android:background="@color/background"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical">
+
     <TextView
+        android:id="@+id/countryHeaderText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/header_text"
-        android:text="@string/countries_header_text"
+        android:layout_marginTop="@dimen/vertical_view_margin"
         android:gravity="center"
+        android:text="@string/countries_header_text"
         android:textColor="@color/textColor"
-        android:textStyle="bold"
-        android:layout_marginTop="@dimen/vertical_view_margin"/>
+        android:textSize="@dimen/header_text"
+        android:textStyle="bold" />
 
-    <View android:layout_width="match_parent"
+    <View
+        android:layout_width="match_parent"
         android:layout_height="@dimen/separator_height"
         android:layout_marginTop="@dimen/vertical_separator_margin"
-        android:background="@color/separatorColor"/>
+        android:background="@color/separatorColor" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/country_selection_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 </LinearLayout>

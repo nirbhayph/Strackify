@@ -3,6 +3,7 @@ package com.sportstracking.strackify.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,10 @@ import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.content.Context.MODE_PRIVATE;
+import static com.sportstracking.strackify.utility.Constants.LATEST_FAV_TEAM;
+import static com.sportstracking.strackify.utility.Constants.LATEST_FAV_TEAM_NAME;
+
 public class TeamsSelectedAdapter extends RecyclerView.Adapter<TeamsSelectedAdapter.MyViewHolder> {
     private ArrayList<Team> teamsData;
     private Activity activity;
@@ -36,7 +41,6 @@ public class TeamsSelectedAdapter extends RecyclerView.Adapter<TeamsSelectedAdap
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView teamNameView;
         public CircleImageView teamThumbView;
-        public ImageButton removeButtonView;
 
         public MyViewHolder(View v) {
             super(v);
@@ -75,7 +79,7 @@ public class TeamsSelectedAdapter extends RecyclerView.Adapter<TeamsSelectedAdap
             public void onClick(View view) {
                 String teamName = teamsData.get(position).getTeamName();
 
-                SharedPreferences preferences = activity.getSharedPreferences(Constants.FAV_TEAMS, Context.MODE_PRIVATE);
+                SharedPreferences preferences = activity.getSharedPreferences(Constants.FAV_TEAMS, MODE_PRIVATE);
                 Set<String> selectedTeams = new LinkedHashSet<>(preferences.getStringSet(Constants.FAV_TEAMS, new LinkedHashSet<String>()));
 
                 Gson gson = new Gson();
@@ -101,6 +105,22 @@ public class TeamsSelectedAdapter extends RecyclerView.Adapter<TeamsSelectedAdap
 
                 teamsData.remove(position);
                 notifyDataSetChanged();
+
+                Log.d("Above Here!1", getItemCount()+"");
+
+                if(getItemCount()==0){
+                    SharedPreferences favTeamPreferences = activity.getSharedPreferences(LATEST_FAV_TEAM, MODE_PRIVATE);
+
+
+                    SharedPreferences.Editor favEditor = favTeamPreferences.edit();
+
+                    favEditor.putString(LATEST_FAV_TEAM, "FAV_TEAM");
+                    favEditor.putString(LATEST_FAV_TEAM_NAME, "FAV_TEAM");
+
+                    favEditor.commit();
+
+                    favTeamPreferences.getString("LATEST_FAV_TEAM", "DEFAULT");
+                }
             }
         });
     }

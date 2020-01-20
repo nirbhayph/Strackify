@@ -1,5 +1,6 @@
 package com.sportstracking.strackify.ui;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import static com.sportstracking.strackify.utility.Constants.LATEST_FAV_TEAM;
 
 public class SportSelection extends AppCompatActivity {
 
@@ -67,5 +70,17 @@ public class SportSelection extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+
+        SharedPreferences preferences = getSharedPreferences(LATEST_FAV_TEAM, MODE_PRIVATE);
+        String latestFavTeam = preferences.getString(LATEST_FAV_TEAM, "FAV_TEAM");
+        if(latestFavTeam.equals("FAV_TEAM")){
+            this.moveTaskToBack(true);
+        }
     }
 }

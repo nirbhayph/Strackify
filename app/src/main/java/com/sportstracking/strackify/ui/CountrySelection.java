@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -16,12 +17,14 @@ import com.sportstracking.strackify.adapter.CountrySelectionAdapter;
 import com.sportstracking.strackify.model.Country;
 import com.sportstracking.strackify.utility.Constants;
 import com.sportstracking.strackify.utility.VolleyService;
+import com.vanniktech.emoji.EmojiManager;
+import com.vanniktech.emoji.twitter.TwitterEmojiProvider;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class CountrySelection extends AppCompatActivity {
 
@@ -33,6 +36,7 @@ public class CountrySelection extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EmojiManager.install(new TwitterEmojiProvider());
         getSelectedSport();
         setContentView(R.layout.activity_country_selection);
         setupDataView();
@@ -43,9 +47,14 @@ public class CountrySelection extends AppCompatActivity {
         if(getIntent().hasExtra(Constants.SPORTS_SELECTION)){
             selectedSport = getIntent().getStringExtra(Constants.SPORTS_SELECTION);
         }
+        else{
+            selectedSport="Soccer";
+        }
     }
 
     private void setupDataView(){
+        TextView headerTitle = findViewById(R.id.countryHeaderText);
+        headerTitle.setText("Select a country your " + selectedSport + "\nteam belongs to");
         countrySelectionRecyclerView = findViewById(R.id.country_selection_recycler_view);
         countrySelectionRecyclerView.setHasFixedSize(true);
 
@@ -61,14 +70,21 @@ public class CountrySelection extends AppCompatActivity {
     public void updateUI(JSONObject response){
 
         ArrayList<Country> countries = new ArrayList<Country>();
-        Iterator<String> iterator = response.keys();
+
         try {
-            while (iterator.hasNext()) {
-                String countryCode = iterator.next();
-                String countryName = response.get(countryCode).toString();
+            JSONArray countriesList = (JSONArray) response.get("countries");
+            for (int i=0; i<countriesList.length(); i++) {
+                JSONObject iCountry = countriesList.getJSONObject(i);
+                String name = iCountry.getString("name");
+                String code = iCountry.getString("code");
+                String emoji = iCountry.getString("emoji");
+                String unicode = iCountry.getString("unicode");
+
                 Country country = new Country();
-                country.setCountryCode(countryCode);
-                country.setCountryName(countryName);
+                country.setCountryCode(code);
+                country.setCountryName(name);
+                country.setCountryUnicode(unicode);
+                country.setCountryEmoji(emoji);
                 countries.add(country);
             }
             countrySelectionAdapter = new CountrySelectionAdapter(this, countries, selectedSport);

@@ -2,6 +2,7 @@ package com.sportstracking.strackify.authentication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +10,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -26,8 +29,10 @@ import com.sportstracking.strackify.R;
 import com.sportstracking.strackify.ui.Home;
 import com.sportstracking.strackify.ui.SportSelection;
 import com.sportstracking.strackify.utility.Constants;
+import com.sportstracking.strackify.utility.VolleyService;
 
 import static com.sportstracking.strackify.utility.Constants.LATEST_FAV_TEAM;
+import static com.sportstracking.strackify.utility.Constants.SIGN_OUT;
 
 public class SignInActivity extends AppCompatActivity{
 
@@ -52,6 +57,8 @@ public class SignInActivity extends AppCompatActivity{
 
         mAuth = FirebaseAuth.getInstance();
 
+        changeBackground();
+
         Button signInButton = findViewById(R.id.signInButton);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +66,10 @@ public class SignInActivity extends AppCompatActivity{
                 signIn();
             }
         });
+
+        if(getIntent().hasExtra(SIGN_OUT)){
+            this.signOut();
+        }
     }
 
     @Override
@@ -66,7 +77,14 @@ public class SignInActivity extends AppCompatActivity{
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        changeBackground();
         updateUI(currentUser);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        changeBackground();
     }
 
     @Override
@@ -172,9 +190,12 @@ public class SignInActivity extends AppCompatActivity{
             }
             startActivity(intent);
         }
-        else{
-            // do something here
-        }
+    }
+
+    private void changeBackground(){
+        ConstraintLayout signInLayout = findViewById(R.id.signInLayout);
+        VolleyService volleyService = new VolleyService(this, Constants.SIGN_IN, getApplicationContext());
+        volleyService.makeImageRequest("https://source.unsplash.com/900x1600/?basketball", signInLayout);
     }
 }
 
