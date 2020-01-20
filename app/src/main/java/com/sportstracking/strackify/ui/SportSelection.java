@@ -36,7 +36,7 @@ public class SportSelection extends AppCompatActivity {
         sportSelectionRecyclerView = findViewById(R.id.sports_selection_recycler_view);
         sportSelectionRecyclerView.setHasFixedSize(true);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         sportSelectionRecyclerView.setLayoutManager(gridLayoutManager);
     }
 

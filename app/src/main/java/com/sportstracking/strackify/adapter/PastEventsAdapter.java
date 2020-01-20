@@ -1,6 +1,7 @@
 package com.sportstracking.strackify.adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,11 @@ import com.sportstracking.strackify.model.PastEvent;
 import com.sportstracking.strackify.R;
 import com.sportstracking.strackify.utility.VolleyService;
 
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class PastEventsAdapter extends RecyclerView.Adapter<PastEventsAdapter.MyViewHolder> implements Filterable {
     private ArrayList<PastEvent> pastEventsData;
@@ -28,6 +33,7 @@ public class PastEventsAdapter extends RecyclerView.Adapter<PastEventsAdapter.My
         public ImageView eventThumbView;
         public TextView eventLeagueView;
         public TextView eventDateView;
+        public TextView scoreDetailsView;
 
         public MyViewHolder(View v) {
             super(v);
@@ -35,6 +41,7 @@ public class PastEventsAdapter extends RecyclerView.Adapter<PastEventsAdapter.My
             eventThumbView = v.findViewById(R.id.eventThumb);
             eventLeagueView = v.findViewById(R.id.eventLeague);
             eventDateView = v.findViewById(R.id.eventDate);
+            scoreDetailsView = v.findViewById(R.id.scoreDetails);
         }
     }
 
@@ -63,8 +70,36 @@ public class PastEventsAdapter extends RecyclerView.Adapter<PastEventsAdapter.My
         }
 
         holder.eventLeagueView.setText(pastEventsData.get(position).getEventLeague());
-        holder.eventDateView.setText(pastEventsData.get(position).getEventDate());
 
+        if(pastEventsData.get(position).getAwayScore()!=null && !pastEventsData.get(position).getAwayScore().isEmpty() && !pastEventsData.get(position).getAwayScore().equals("null")){
+            holder.scoreDetailsView.setText(pastEventsData.get(position).getHomeTeam() + " [" + pastEventsData.get(position).getHomeScore() + " - " + pastEventsData.get(position).getAwayScore() + "] " + pastEventsData.get(position).getAwayTeam());
+        }
+        else{
+            holder.scoreDetailsView.setVisibility(View.GONE);
+        }
+
+        String dateTime="";
+        String time = pastEventsData.get(position).getEventTime();
+        String format="", pattern="";
+        if(!time.equals("null") && !time.equals(null) && !time.isEmpty()){
+            dateTime = pastEventsData.get(position).getEventDate() + " " + pastEventsData.get(position).getEventTime();
+            format = "yyyy-MM-dd HH:mm:ss";
+                    pattern = "dd MMMM, yyyy @ hh:mm a";
+        }
+        else {
+            dateTime = pastEventsData.get(position).getEventDate();
+            format = "yyyy-MM-dd";
+            pattern = "dd MMMM, yyyy";
+        }
+        try{
+            String dateTimeStr = dateTime;
+            Date date = new SimpleDateFormat(format).parse(dateTimeStr);
+            String formatedDate = new SimpleDateFormat(pattern).format(date);
+            holder.eventDateView.setText(formatedDate);
+        }
+        catch (Exception e){
+            holder.eventDateView.setVisibility(View.GONE);
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

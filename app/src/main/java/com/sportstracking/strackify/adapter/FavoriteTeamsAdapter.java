@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sportstracking.strackify.R;
 import com.sportstracking.strackify.model.Team;
+import com.sportstracking.strackify.ui.aboutteam.AboutTeamFragment;
 import com.sportstracking.strackify.ui.pastevents.PastEventsFragment;
 import com.sportstracking.strackify.ui.upcomingevents.UpcomingEventsFragment;
 import com.sportstracking.strackify.utility.Constants;
@@ -17,6 +18,8 @@ import com.sportstracking.strackify.utility.VolleyService;
 
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FavoriteTeamsAdapter extends RecyclerView.Adapter<FavoriteTeamsAdapter.MyViewHolder> {
     private ArrayList<Team> teamsData;
@@ -47,16 +50,39 @@ public class FavoriteTeamsAdapter extends RecyclerView.Adapter<FavoriteTeamsAdap
     @Override
     public FavoriteTeamsAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                                 int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.favorite_team_view, parent, false);
+        View v;
+        switch (callFrom){
+            case Constants.ABOUT_TEAM:{
+                v = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.favorite_about_team_view, parent, false);
+                break;
+            }
+            default: {
+                v = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.favorite_team_view, parent, false);
+            }
+
+        }
         MyViewHolder vh = new MyViewHolder(v);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.teamNameView.setText(teamsData.get(position).getTeamName());
-        volleyService.makeImageRequest(teamsData.get(position).getTeamBadge(), holder.teamThumbView);
+        String teamNameText = teamsData.get(position).getTeamName();
+        if(!callFrom.equals(Constants.ABOUT_TEAM)){
+            if(teamNameText.length()>10){
+                teamNameText = teamNameText.substring(0, 7) + "..";
+            }         }
+
+        holder.teamNameView.setText(teamNameText);
+
+        if(!teamsData.get(position).getTeamBadge().equals("null") && !teamsData.get(position).getTeamBadge().equals(null) && !teamsData.get(position).getTeamBadge().isEmpty()){
+            volleyService.makeImageRequest(teamsData.get(position).getTeamBadge(), holder.teamThumbView);
+        }
+        else{
+            volleyService.makeImageRequest("https://images.unsplash.com/photo-1563882757905-21bd5e0875fe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80", holder.teamThumbView);
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +101,11 @@ public class FavoriteTeamsAdapter extends RecyclerView.Adapter<FavoriteTeamsAdap
                             .UPCOMING_EVENTS: {
                         UpcomingEventsFragment upcomingEventsFragment = (UpcomingEventsFragment) reference;
                         upcomingEventsFragment.makeNewRequest(teamId, teamName);
+                        break;
+                    }
+                    case Constants.ABOUT_TEAM: {
+                        AboutTeamFragment aboutTeamFragment = (AboutTeamFragment) reference;
+                        aboutTeamFragment.showTeamDetails(teamsData.get(position));
                         break;
                     }
                 }

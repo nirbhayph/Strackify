@@ -15,7 +15,9 @@ import com.sportstracking.strackify.R;
 import com.sportstracking.strackify.model.UpcomingEvent;
 import com.sportstracking.strackify.utility.VolleyService;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class UpcomingEventsAdapter extends RecyclerView.Adapter<UpcomingEventsAdapter.MyViewHolder> implements Filterable {
     private ArrayList<UpcomingEvent> upcomingEventsData;
@@ -28,6 +30,7 @@ public class UpcomingEventsAdapter extends RecyclerView.Adapter<UpcomingEventsAd
         public ImageView eventThumbView;
         public TextView eventLeagueView;
         public TextView eventDateView;
+        public TextView scoreDetailsView;
 
         public MyViewHolder(View v) {
             super(v);
@@ -35,6 +38,7 @@ public class UpcomingEventsAdapter extends RecyclerView.Adapter<UpcomingEventsAd
             eventThumbView = v.findViewById(R.id.eventThumb);
             eventLeagueView = v.findViewById(R.id.eventLeague);
             eventDateView = v.findViewById(R.id.eventDate);
+            scoreDetailsView = v.findViewById(R.id.scoreDetails);
         }
     }
 
@@ -63,7 +67,36 @@ public class UpcomingEventsAdapter extends RecyclerView.Adapter<UpcomingEventsAd
         }
 
         holder.eventLeagueView.setText(upcomingEventsData.get(position).getEventLeague());
-        holder.eventDateView.setText(upcomingEventsData.get(position).getEventDate());
+
+        if(upcomingEventsData.get(position).getAwayScore()!=null && !upcomingEventsData.get(position).getAwayScore().isEmpty() && !upcomingEventsData.get(position).getAwayScore().equals("null")){
+            holder.scoreDetailsView.setText(upcomingEventsData.get(position).getHomeTeam() + " [" + upcomingEventsData.get(position).getHomeScore() + " - " + upcomingEventsData.get(position).getAwayScore() + "] " + upcomingEventsData.get(position).getAwayTeam());
+        }
+        else{
+            holder.scoreDetailsView.setVisibility(View.GONE);
+        }
+
+        String dateTime="";
+        String time = upcomingEventsData.get(position).getEventTime();
+        String format="", pattern="";
+        if(!time.equals("null") && !time.equals(null) && !time.isEmpty()){
+            dateTime = upcomingEventsData.get(position).getEventDate() + " " + upcomingEventsData.get(position).getEventTime();
+            format = "yyyy-MM-dd HH:mm:ss";
+            pattern = "dd MMMM, yyyy @ hh:mm a";
+        }
+        else {
+            dateTime = upcomingEventsData.get(position).getEventDate();
+            format = "yyyy-MM-dd";
+            pattern = "dd MMMM, yyyy";
+        }
+        try{
+            String dateTimeStr = dateTime;
+            Date date = new SimpleDateFormat(format).parse(dateTimeStr);
+            String formatedDate = new SimpleDateFormat(pattern).format(date);
+            holder.eventDateView.setText(formatedDate);
+        }
+        catch (Exception e){
+            holder.eventDateView.setVisibility(View.GONE);
+        }
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

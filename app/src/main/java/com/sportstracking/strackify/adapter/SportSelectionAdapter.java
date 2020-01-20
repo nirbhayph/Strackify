@@ -18,6 +18,8 @@ import com.sportstracking.strackify.utility.VolleyService;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class SportSelectionAdapter extends RecyclerView.Adapter<SportSelectionAdapter.MyViewHolder>{
     private ArrayList<Sport> sportsData;
     private VolleyService volleyService;
@@ -25,7 +27,7 @@ public class SportSelectionAdapter extends RecyclerView.Adapter<SportSelectionAd
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView sportNameView;
-        public ImageView sportThumbView;
+        public CircleImageView sportThumbView;
         public MyViewHolder(View v) {
             super(v);
             sportNameView = v.findViewById(R.id.sportName);

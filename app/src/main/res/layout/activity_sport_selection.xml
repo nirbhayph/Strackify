@@ -2,27 +2,27 @@
 <LinearLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@color/backgroundDark"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="@color/background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center_horizontal">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/headerText"
-        android:text="Select a sport \n of your interest!"
+        android:textSize="@dimen/header_text"
+        android:text="@string/sports_header_text"
         android:gravity="center"
-        android:textColor="@color/white"
-        android:textStyle="normal"
-        android:layout_marginTop="@dimen/verticalViewMargin"/>
+        android:textColor="@color/textColor"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/vertical_view_margin"/>
 
-    <View
-        android:layout_marginTop="@dimen/verticalViewMargin"
-        android:layout_width="match_parent"
-        android:layout_height="0.7dp"
-        android:layout_marginHorizontal="15dp"
-        android:background="@color/colorPrimary"/>
+    <View android:layout_width="match_parent"
+        android:layout_height="@dimen/separator_height"
+        android:layout_marginTop="@dimen/vertical_separator_margin"
+        android:background="@color/separatorColor"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_gravity="center_horizontal"
         android:id="@+id/sports_selection_recycler_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </LinearLayout>

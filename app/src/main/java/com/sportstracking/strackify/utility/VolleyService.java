@@ -16,6 +16,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.sportstracking.strackify.ui.CountrySelection;
 import com.sportstracking.strackify.ui.SportSelection;
 import com.sportstracking.strackify.ui.TeamSelection;
+import com.sportstracking.strackify.ui.changefavorite.SettingsViewModel;
 import com.sportstracking.strackify.ui.pastevents.PastEventsViewModel;
 import com.sportstracking.strackify.ui.upcomingevents.UpcomingEventsViewModel;
 
@@ -116,6 +117,7 @@ public class VolleyService {
             case Constants.UPCOMING_EVENTS_DISPLAY: {
                 UpcomingEventsViewModel upcomingEventsViewModel = (UpcomingEventsViewModel) reference;
                 upcomingEventsViewModel.updateUpcomingEvents(response);
+                break;
             }
         }
     }

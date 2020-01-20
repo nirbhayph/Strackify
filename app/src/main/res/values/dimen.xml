@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="buttonPadding">20dp</dimen>
-    <dimen name="headerText">25dp</dimen>
-    <dimen name="verticalViewMargin">20dp</dimen>
+    <dimen name="button_padding">20dp</dimen>
+
+
+    <dimen name="header_text">20dp</dimen>
+    <dimen name="vertical_view_margin">16dp</dimen>
+    <dimen name="vertical_separator_margin">8dp</dimen>
+    <dimen name="normal_text_size">14dp</dimen>
+    <dimen name="medium_text_size">16dp</dimen>
+    <dimen name="vertical_padding">2dp</dimen>
 </resources>

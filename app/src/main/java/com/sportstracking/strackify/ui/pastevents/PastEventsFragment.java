@@ -2,7 +2,9 @@ package com.sportstracking.strackify.ui.pastevents;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,9 +12,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -25,16 +30,21 @@ import com.sportstracking.strackify.adapter.FavoriteTeamsAdapter;
 import com.sportstracking.strackify.adapter.PastEventsAdapter;
 import com.sportstracking.strackify.model.PastEvent;
 import com.sportstracking.strackify.model.Team;
+import com.sportstracking.strackify.ui.SportSelection;
 import com.sportstracking.strackify.utility.Constants;
 import com.sportstracking.strackify.utility.VolleyService;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PastEventsFragment extends Fragment {
 
     private PastEventsViewModel pastEventsViewModel;
     private ArrayList<PastEvent> pastEvents;
     private ArrayList<Team> favorites;
+
+    private ImageView addTeam;
 
     private RecyclerView pastEventsRecyclerView, favoriteTeamsRecyclerView;
     private PastEventsAdapter pastEventsAdapter;
@@ -70,6 +80,9 @@ public class PastEventsFragment extends Fragment {
     }
 
     private void setupDataView(){
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("  Past Events");
+
         pastEventsRecyclerView = root.findViewById(R.id.past_events_recycler_view);
         pastEventsRecyclerView.setHasFixedSize(true);
 
@@ -82,12 +95,21 @@ public class PastEventsFragment extends Fragment {
         LinearLayoutManager layoutManagerFavorites = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         favoriteTeamsRecyclerView.setLayoutManager(layoutManagerFavorites);
 
+        addTeam = root.findViewById(R.id.addTeam);
+
+        addTeam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SportSelection.class);
+                getActivity().startActivity(intent);
+            }
+        });
+
     }
 
     public void makeNewRequest(String teamId, String teamName){
         SharedPreferences sharedPref = getActivity().getApplicationContext().getSharedPreferences(Constants.LATEST_FAV_TEAM, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        Log.d("TeamId", teamId);
         editor.putString(Constants.LATEST_FAV_TEAM, teamId);
         editor.putString(Constants.LATEST_FAV_TEAM_NAME, teamName);
         editor.commit();
@@ -108,6 +130,31 @@ public class PastEventsFragment extends Fragment {
             @Override
             public void onChanged(@Nullable ArrayList<Team> teams ) {
                 updateFavorites(teams);
+            }
+        });
+
+        pastEventsViewModel.getTeamName().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String team ) {
+                TextView title = root.findViewById(R.id.teamsHeaderText);
+                title.setText(team);
+            }
+        });
+
+        pastEventsViewModel.getNotFoundStatus().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean status ) {
+                TextView notFoundMessage = root.findViewById(R.id.notFoundMessage);
+                ImageView notFoundImage = root.findViewById(R.id.notFoundImage);
+
+                if(status){
+                    notFoundMessage.setVisibility(View.VISIBLE);
+                    notFoundImage.setVisibility(View.VISIBLE);
+                }
+                else{
+                    notFoundImage.setVisibility(View.GONE);
+                    notFoundMessage.setVisibility(View.GONE);
+                }
             }
         });
     }

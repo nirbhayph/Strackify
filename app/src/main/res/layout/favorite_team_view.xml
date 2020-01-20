@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/teamThumb" />
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginHorizontal="8dp"
+    android:layout_gravity="center_horizontal">
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/teamThumb"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:elevation="2dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/colorPrimary"/>
+
     <TextView
+        android:id="@+id/teamName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textColor="@color/white"
-        android:id="@+id/teamName"
-        />
+        android:textColor="@color/textColor"
+        android:gravity="center"
+        android:textSize="@dimen/normal_text_size"
+        android:padding="5dp"/>
+
 </LinearLayout>

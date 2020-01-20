@@ -16,8 +16,14 @@ public class Constants {
     public static final String TEAMS_SELECTION = "TEAMS_SELECTION";
     public static final String PAST_EVENTS_DISPLAY = "PAST_EVENTS_DISPLAY";
     public static final String UPCOMING_EVENTS_DISPLAY = "UPCOMING_EVENTS_DISPLAY";
+    public static final String SETTINGS_DISPLAY = "SETTINGS_DISPLAY";
 
     public static final String LATEST_FAV_TEAM = "LATEST_FAV_TEAM";
     public static final String LATEST_FAV_TEAM_NAME = "LATEST_FAV_TEAM_NAME";
     public static final String FAV_TEAMS = "FAV_TEAMS";
+    public static final String ABOUT_TEAM = "ABOUT_TEAM";
+    public static final String SIGN_IN = "SIGN_IN";
+    public static final String SIGN_IN_EMAIL = "SIGN_IN_EMAIL";
+    public static final String SIGN_IN_NAME = "SIGN_IN_NAME";
+    public static final String SIGN_IN_PROFILE_IMAGE = "SIGN_IN_PROFILE_IMAGE";
 }

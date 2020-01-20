@@ -27,12 +27,16 @@ import java.util.Set;
 public class UpcomingEventsViewModel extends AndroidViewModel {
 
     private VolleyService volleyService;
+    private MutableLiveData<String> teamName;
+    private MutableLiveData<Boolean> notFoundStatus;
     private MutableLiveData<ArrayList<UpcomingEvent>> upcomingEvents = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Team>> favorites = new MutableLiveData<>();
 
 
     public UpcomingEventsViewModel(Application application) {
         super(application);
+        teamName = new MutableLiveData<>();
+        notFoundStatus = new MutableLiveData<>();
         updateFavorites();
         makeDataRequest();
     }
@@ -43,6 +47,12 @@ public class UpcomingEventsViewModel extends AndroidViewModel {
     public LiveData<ArrayList<Team>> getFavorites(){
         return favorites;
     }
+    public LiveData<String> getTeamName() {
+        return teamName;
+    }
+    public LiveData<Boolean> getNotFoundStatus() {return notFoundStatus; }
+
+
 
 
     public void updateUpcomingEvents(JSONObject response){
@@ -58,18 +68,28 @@ public class UpcomingEventsViewModel extends AndroidViewModel {
                 upcomingEvent.setEventDate(upcomingEventItem.get("dateEvent").toString());
                 upcomingEvent.setEventLeague(upcomingEventItem.get("strLeague").toString());
 
+                upcomingEvent.setEventTime(upcomingEventItem.get("strTime").toString());
+                upcomingEvent.setAwayScore(upcomingEventItem.get("intAwayScore").toString());
+                upcomingEvent.setAwayTeam(upcomingEventItem.get("strAwayTeam").toString());
+                upcomingEvent.setHomeScore(upcomingEventItem.get("intHomeScore").toString());
+                upcomingEvent.setHomeTeam(upcomingEventItem.get("strHomeTeam").toString());
+
                 if(!upcomingEventItem.get("strThumb").toString().isEmpty() && !upcomingEventItem.get("strThumb").toString().equals("null") ){
-                    upcomingEvent.setEventThumbnail("strThumb");
+                    upcomingEvent.setEventThumbnail(upcomingEventItem.get("strThumb").toString());
+
                 }
                 else{
-                    upcomingEvent.setEventThumbnail("https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80");
+                    upcomingEvent.setEventThumbnail("https://images.unsplash.com/photo-1563882757905-21bd5e0875fe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80");
                 }
                 upcomingEventsArrayList.add(upcomingEvent);
             }
+            notFoundStatus.setValue(false);
             upcomingEvents.setValue(upcomingEventsArrayList);
         }
         catch (Exception e){
             e.printStackTrace();
+            notFoundStatus.setValue(true);
+
             upcomingEvents.setValue(new ArrayList<UpcomingEvent>());
 
             Toast.makeText(getApplication(), "No upcoming events found!", Toast.LENGTH_LONG).show();
@@ -94,6 +114,7 @@ public class UpcomingEventsViewModel extends AndroidViewModel {
     public void makeDataRequest(){
         SharedPreferences sharedPref = getApplication().getApplicationContext().getSharedPreferences(Constants.LATEST_FAV_TEAM, Context.MODE_PRIVATE);
         String favoriteTeamId = sharedPref.getString(Constants.LATEST_FAV_TEAM, "FAV_TEAM");
+        teamName.setValue(sharedPref.getString(Constants.LATEST_FAV_TEAM_NAME, ""));
         volleyService = new VolleyService(this, Constants.UPCOMING_EVENTS_DISPLAY, getApplication().getApplicationContext());
         volleyService.makeRequest(Constants.UPCOMING_EVENTS + Constants.TEAM_ID_IDENTIFIER + favoriteTeamId);
         Log.d("URL_UPCOMING", Constants.UPCOMING_EVENTS + Constants.TEAM_ID_IDENTIFIER + favoriteTeamId);

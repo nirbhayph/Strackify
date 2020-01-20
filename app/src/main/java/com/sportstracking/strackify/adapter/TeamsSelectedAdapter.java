@@ -26,6 +26,8 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class TeamsSelectedAdapter extends RecyclerView.Adapter<TeamsSelectedAdapter.MyViewHolder> {
     private ArrayList<Team> teamsData;
     private Activity activity;
@@ -33,14 +35,13 @@ public class TeamsSelectedAdapter extends RecyclerView.Adapter<TeamsSelectedAdap
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView teamNameView;
-        public ImageView teamThumbView;
+        public CircleImageView teamThumbView;
         public ImageButton removeButtonView;
 
         public MyViewHolder(View v) {
             super(v);
             teamNameView = v.findViewById(R.id.teamName);
             teamThumbView = v.findViewById(R.id.teamThumb);
-            removeButtonView = v.findViewById(R.id.removeFavorite);
         }
     }
 
@@ -61,10 +62,15 @@ public class TeamsSelectedAdapter extends RecyclerView.Adapter<TeamsSelectedAdap
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.teamNameView.setText(teamsData.get(position).getTeamName());
+
+        String teamNameText = teamsData.get(position).getTeamName();
+        if(teamNameText.length()>10){
+            teamNameText = teamNameText.substring(0, 7) + "..";
+        }
+        holder.teamNameView.setText(teamNameText);
         volleyService.makeImageRequest(teamsData.get(position).getTeamBadge(), holder.teamThumbView);
 
-        holder.removeButtonView.setOnClickListener(new View.OnClickListener() {
+        holder.teamNameView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String teamName = teamsData.get(position).getTeamName();

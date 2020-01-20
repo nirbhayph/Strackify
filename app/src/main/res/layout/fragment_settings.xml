@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/settingsContent"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+    android:paddingVertical="@dimen/vertical_padding">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginVertical="@dimen/activity_vertical_margin"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_gravity="center_horizontal">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profileThumb"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:elevation="4dp"
+                    android:layout_gravity="center_horizontal"
+                    app:civ_border_width="3dp"
+                    app:civ_border_color="@color/border"/>
+
+                <TextView
+                    android:id="@+id/profileName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/textColor"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/normal_text_size"
+                    android:padding="5dp"/>
+                <TextView
+                    android:id="@+id/profileEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/textColor"
+                    android:gravity="center"
+                    android:textSize="@dimen/normal_text_size"
+                    android:padding="5dp"/>
+        </LinearLayout>
+
+
+        <View android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height"
+            android:background="@color/gray"
+            android:layout_marginVertical="@dimen/vertical_view_margin"/>
+
+        <TextView
+            android:id="@+id/settingsManageFavs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textStyle="normal"
+            android:textSize="@dimen/medium_text_size"
+            android:paddingVertical="@dimen/vertical_padding"
+            android:text="Manage (Add/Remove) Favorites"
+            android:drawableEnd="@drawable/baseline_arrow_forward_ios_black_18"
+            android:drawableRight="@drawable/baseline_arrow_forward_ios_black_18"
+            android:layout_weight="1"
+            />
+        <View android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height"
+            android:background="@color/gray"
+            android:layout_marginVertical="@dimen/vertical_view_margin"/>
+
+        <TextView
+            android:id="@+id/aboutDeveloper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textStyle="normal"
+            android:textSize="@dimen/medium_text_size"
+            android:paddingVertical="@dimen/vertical_padding"
+            android:text="About Developer"
+            android:drawableEnd="@drawable/baseline_arrow_forward_ios_black_18"
+            android:drawableRight="@drawable/baseline_arrow_forward_ios_black_18"
+            android:layout_weight="1"
+            />
+        <View android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height"
+            android:background="@color/gray"
+            android:layout_marginVertical="@dimen/vertical_view_margin"/>
+
+        <TextView
+            android:id="@+id/ackMentions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textStyle="normal"
+            android:textSize="@dimen/medium_text_size"
+            android:paddingVertical="@dimen/vertical_padding"
+            android:text="Acknowledgments and Mentions"
+            android:drawableEnd="@drawable/baseline_arrow_forward_ios_black_18"
+            android:drawableRight="@drawable/baseline_arrow_forward_ios_black_18"
+            android:layout_weight="1"
+            />
+        <View android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height"
+            android:background="@color/gray"
+            android:layout_marginVertical="@dimen/vertical_view_margin"/>
+
+        <TextView
+            android:id="@+id/contributions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textStyle="normal"
+            android:textSize="@dimen/medium_text_size"
+            android:paddingVertical="@dimen/vertical_padding"
+            android:text="Contribute to Project"
+            android:drawableEnd="@drawable/baseline_arrow_forward_ios_black_18"
+            android:drawableRight="@drawable/baseline_arrow_forward_ios_black_18"
+            android:layout_weight="1"
+            />
+        <View android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height"
+            android:background="@color/gray"
+            android:layout_marginVertical="@dimen/vertical_view_margin"/>
+
+        <TextView
+            android:id="@+id/viewOnPlayStore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textStyle="normal"
+            android:textSize="@dimen/medium_text_size"
+            android:paddingVertical="@dimen/vertical_padding"
+            android:text="Play Store Link"
+            android:drawableEnd="@drawable/baseline_arrow_forward_ios_black_18"
+            android:drawableRight="@drawable/baseline_arrow_forward_ios_black_18"
+            android:layout_weight="1"
+            />
+        <View android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height"
+            android:background="@color/gray"
+            android:layout_marginVertical="@dimen/vertical_view_margin"/>
+
+        <TextView
+            android:id="@+id/shareApp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textStyle="normal"
+            android:textSize="@dimen/medium_text_size"
+            android:paddingVertical="@dimen/vertical_padding"
+            android:text="Share App"
+            android:drawableEnd="@drawable/baseline_arrow_forward_ios_black_18"
+            android:drawableRight="@drawable/baseline_arrow_forward_ios_black_18"
+            android:layout_weight="1"
+            />
+        <View android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height"
+            android:background="@color/gray"
+            android:layout_marginVertical="@dimen/vertical_view_margin"/>
+</LinearLayout>
+
+</LinearLayout>

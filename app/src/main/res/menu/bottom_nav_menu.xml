@@ -8,7 +8,7 @@
 
     <item
         android:id="@+id/navigation_upcoming_events"
-        android:icon="@drawable/baseline_sports_volleyball_24"
+        android:icon="@drawable/baseline_event_24"
         android:title="@string/upcoming" />
 
     <item
@@ -18,7 +18,7 @@
 
     <item
         android:id="@+id/navigation_change_favorite"
-        android:icon="@drawable/baseline_swap_horiz_24"
-        android:title="@string/change_favorite" />
+        android:icon="@drawable/baseline_build_24"
+        android:title="@string/settings_fragment" />
 
 </menu>

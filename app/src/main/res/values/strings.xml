@@ -3,9 +3,13 @@
     <string name="search_title">Search</string>
     <string name="search_hint">Enter a keyword ... </string>
     <string name="title_activity_home">Home</string>
-    <string name="change_favorite">Swap Favorite</string>
+    <string name="settings_fragment">Settings</string>
     <string name="history">Past Events</string>
     <string name="upcoming">Upcoming Events</string>
     <string name="about_team">About Team</string>
     <string name="user_profile">Profile</string>
+    <string name="sports_header_text">Select a sport that is of \n your interest</string>
+    <string name="countries_header_text">Select a country your team \n belongs to</string>
+    <string name="favorites_text">Favorites</string>
+    <string name="select_team_text">Add New Favorite</string>
 </resources>

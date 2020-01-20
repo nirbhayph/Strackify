@@ -2,6 +2,7 @@ package com.sportstracking.strackify.ui.upcomingevents;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,9 +10,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -24,6 +28,7 @@ import com.sportstracking.strackify.adapter.FavoriteTeamsAdapter;
 import com.sportstracking.strackify.adapter.UpcomingEventsAdapter;
 import com.sportstracking.strackify.model.Team;
 import com.sportstracking.strackify.model.UpcomingEvent;
+import com.sportstracking.strackify.ui.SportSelection;
 import com.sportstracking.strackify.utility.Constants;
 import com.sportstracking.strackify.utility.VolleyService;
 
@@ -35,6 +40,7 @@ public class UpcomingEventsFragment extends Fragment {
     private ArrayList<UpcomingEvent> upcomingEvents;
     private ArrayList<Team> favorites;
 
+    private ImageView addTeam;
 
     private RecyclerView upcomingEventsRecyclerView, favoriteTeamsRecyclerView;
     private UpcomingEventsAdapter upcomingEventsAdpater;
@@ -70,6 +76,8 @@ public class UpcomingEventsFragment extends Fragment {
     }
 
     private void setupDataView(){
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("  Upcoming Events");
+
         upcomingEventsRecyclerView = root.findViewById(R.id.upcoming_events_recycler_view);
         upcomingEventsRecyclerView.setHasFixedSize(true);
 
@@ -81,6 +89,16 @@ public class UpcomingEventsFragment extends Fragment {
 
         LinearLayoutManager layoutManagerFavorites = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         favoriteTeamsRecyclerView.setLayoutManager(layoutManagerFavorites);
+
+        addTeam = root.findViewById(R.id.addTeam);
+
+        addTeam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SportSelection.class);
+                getActivity().startActivity(intent);
+            }
+        });
     }
 
     public void makeNewRequest(String teamId, String teamName){
@@ -106,6 +124,31 @@ public class UpcomingEventsFragment extends Fragment {
             @Override
             public void onChanged(@Nullable ArrayList<Team> teams ) {
                 updateFavorites(teams);
+            }
+        });
+
+        upcomingEventsViewModel.getTeamName().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String team ) {
+                TextView title = root.findViewById(R.id.teamsHeaderText);
+                title.setText(team);
+            }
+        });
+
+        upcomingEventsViewModel.getNotFoundStatus().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean status ) {
+                TextView notFoundMessage = root.findViewById(R.id.notFoundMessage);
+                ImageView notFoundImage = root.findViewById(R.id.notFoundImage);
+
+                if(status){
+                    notFoundMessage.setVisibility(View.VISIBLE);
+                    notFoundImage.setVisibility(View.VISIBLE);
+                }
+                else{
+                    notFoundImage.setVisibility(View.GONE);
+                    notFoundMessage.setVisibility(View.GONE);
+                }
             }
         });
     }

@@ -7,6 +7,11 @@ public class PastEvent {
     private String eventDescription;
     private String eventDate;
     private String eventLeague;
+    private String eventTime;
+    private String homeTeam;
+    private String awayTeam;
+    private String homeScore;
+    private String awayScore;
 
     public String getEventId() {
         return eventId;
@@ -54,5 +59,45 @@ public class PastEvent {
 
     public void setEventLeague(String eventLeague) {
         this.eventLeague = eventLeague;
+    }
+
+    public String getEventTime() {
+        return eventTime;
+    }
+
+    public void setEventTime(String eventTime) {
+        this.eventTime = eventTime;
+    }
+
+    public String getHomeTeam() {
+        return homeTeam;
+    }
+
+    public void setHomeTeam(String homeTeam) {
+        this.homeTeam = homeTeam;
+    }
+
+    public String getAwayTeam() {
+        return awayTeam;
+    }
+
+    public void setAwayTeam(String awayTeam) {
+        this.awayTeam = awayTeam;
+    }
+
+    public String getHomeScore() {
+        return homeScore;
+    }
+
+    public void setHomeScore(String homeScore) {
+        this.homeScore = homeScore;
+    }
+
+    public String getAwayScore() {
+        return awayScore;
+    }
+
+    public void setAwayScore(String awayScore) {
+        this.awayScore = awayScore;
     }
 }

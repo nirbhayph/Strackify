@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -153,6 +154,8 @@ public class TeamSelection extends AppCompatActivity {
         catch (Exception e){
             TextView notFoundTextView = findViewById(R.id.notFoundMessage);
             notFoundTextView.setVisibility(View.VISIBLE);
+            ImageView oopsImage = findViewById(R.id.notFoundImage);
+            oopsImage.setVisibility(View.VISIBLE);
             Toast.makeText(this, "No teams found! Try another combination!", Toast.LENGTH_LONG).show();
         }
     }

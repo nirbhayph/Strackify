@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,7 +23,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.sportstracking.strackify.R;
+import com.sportstracking.strackify.ui.Home;
 import com.sportstracking.strackify.ui.SportSelection;
+import com.sportstracking.strackify.utility.Constants;
+
+import static com.sportstracking.strackify.utility.Constants.LATEST_FAV_TEAM;
 
 public class SignInActivity extends AppCompatActivity{
 
@@ -144,7 +149,27 @@ public class SignInActivity extends AppCompatActivity{
 
     private void updateUI(FirebaseUser user){
         if(user!=null){
-            Intent intent = new Intent(SignInActivity.this, SportSelection.class);
+            SharedPreferences preferences = getSharedPreferences(LATEST_FAV_TEAM, MODE_PRIVATE);
+            String latestFavTeam = preferences.getString(LATEST_FAV_TEAM, "FAV_TEAM");
+
+            SharedPreferences userPreferences = getSharedPreferences(Constants.SIGN_IN, MODE_PRIVATE);
+            SharedPreferences.Editor editor = userPreferences.edit();
+
+            editor.putString(Constants.SIGN_IN_EMAIL, user.getEmail().toString());
+            editor.putString(Constants.SIGN_IN_NAME, user.getDisplayName().toString());
+            editor.putString(Constants.SIGN_IN_PROFILE_IMAGE, user.getPhotoUrl().toString());
+
+            editor.commit();
+
+
+            Intent intent;
+
+            if(latestFavTeam.equals("FAV_TEAM")){
+                intent = new Intent(SignInActivity.this, SportSelection.class);
+            }
+            else{
+                intent = new Intent(SignInActivity.this, Home.class);
+            }
             startActivity(intent);
         }
         else{
