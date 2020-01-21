@@ -93,7 +93,7 @@ public class UpcomingEventsViewModel extends AndroidViewModel {
                     upcomingEvent.setEventThumbnail(upcomingEventItem.get("strThumb").toString());
 
                 } else {
-                    upcomingEvent.setEventThumbnail("https://source.unsplash.com/1500x300/?"+upcomingEvent.getEventName()+",soccer,basketball");
+                    upcomingEvent.setEventThumbnail("https://source.unsplash.com/850x400/?soccer,basketball,"+upcomingEvent.getEventName().split(" vs")[0]);
                 }
                 upcomingEventsArrayList.add(upcomingEvent);
             }

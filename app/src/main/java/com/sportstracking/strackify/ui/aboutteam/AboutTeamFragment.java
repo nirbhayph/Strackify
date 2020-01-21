@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +31,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.sportstracking.strackify.R;
 import com.sportstracking.strackify.adapter.FavoriteTeamsAdapter;
 import com.sportstracking.strackify.model.Team;
@@ -131,6 +129,7 @@ public class AboutTeamFragment extends Fragment {
     /**
      * stores the favorites
      * makes a call to update the favorites view
+     *
      * @param favorites list of favorites selected by user
      */
     public void updateFavorites(ArrayList<Team> favorites) {
@@ -209,25 +208,26 @@ public class AboutTeamFragment extends Fragment {
         });
         teamName.setText(team.getTeamName());
         teamDescription.setText(team.getTeamDescription());
-        volleyService.makeImageRequest("https://source.unsplash.com/1500x300/?"+team.getSportName(), teamThumb);
-        volleyService.makeImageRequest("https://source.unsplash.com/1500x300/?"+team.getTeamName()+","+team.getSportName(), fanArt);
+        volleyService.makeImageRequest("https://source.unsplash.com/1500x300/?" + team.getSportName(), teamThumb);
+        volleyService.makeImageRequest("https://source.unsplash.com/1500x300/?" + team.getTeamName() + "," + team.getSportName(), fanArt);
         country.setText("Country : " + team.getTeamCountry());
         league.setText("League : " + team.getLeagueName());
         stadium.setText("Stadium : " + team.getStadium());
         formedYear.setText("Formed Year :" + team.getFormedYear());
         gender.setText("Gender : " + team.getGender());
-        sport.setText("Sport Played : "+ team.getSportName());
+        sport.setText("Sport Played : " + team.getSportName());
     }
 
     /**
      * Opens a link in the browser
+     *
      * @param url link to open in the browser
      */
     private void openLink(String url) {
         try {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(browserIntent);
-        }catch (Exception e){
+        } catch (Exception e) {
             Toast.makeText(getActivity().getApplicationContext(), "Cannot open the url!", Toast.LENGTH_SHORT);
         }
     }

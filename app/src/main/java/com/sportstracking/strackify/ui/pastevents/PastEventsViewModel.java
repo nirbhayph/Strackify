@@ -90,7 +90,7 @@ public class PastEventsViewModel extends AndroidViewModel {
                 if (!pastEventItem.get("strThumb").toString().isEmpty() && !pastEventItem.get("strThumb").toString().equals("null")) {
                     pastEvent.setEventThumbnail(pastEventItem.get("strThumb").toString());
                 } else {
-                    pastEvent.setEventThumbnail("https://source.unsplash.com/1500x300/?" + pastEvent.getEventName()+",soccer,basketball");
+                    pastEvent.setEventThumbnail("https://source.unsplash.com/850x400/?soccer,basketball,"+pastEvent.getEventName().split(" vs")[0]);
                 }
                 pastEventsArrayList.add(pastEvent);
             }

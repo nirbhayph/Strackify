@@ -1,30 +1,34 @@
 package com.sportstracking.strackify.adapter;
 
+/**
+ * strackify: team selected adapter (favorites bar in team selection)
+ * populates the favorite teams data
+ * in the favorites recycler view.
+ * uses the selected_team_view layout file
+ *
+ * @author Nirbhay Ashok Pherwani
+ * email: np5318@rit.edu
+ * profile: https://nirbhay.me
+ */
+
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.gson.Gson;
 import com.sportstracking.strackify.R;
 import com.sportstracking.strackify.model.Team;
 import com.sportstracking.strackify.ui.TeamSelection;
 import com.sportstracking.strackify.utility.Values;
 import com.sportstracking.strackify.utility.VolleyService;
-
-
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
 import de.hdodenhof.circleimageview.CircleImageView;
-
 import static android.content.Context.MODE_PRIVATE;
 import static com.sportstracking.strackify.utility.Values.FAV_CHECKER;
 import static com.sportstracking.strackify.utility.Values.LATEST_FAV_TEAM;
@@ -46,12 +50,26 @@ public class TeamsSelectedAdapter extends RecyclerView.Adapter<TeamsSelectedAdap
         }
     }
 
+    /**
+     * Paremtrized constructor to setup the adapter
+     *
+     * @param activity      activity set from
+     * @param teamsData     teams data data array list
+     * @param volleyService volley service reference
+     */
     public TeamsSelectedAdapter(Activity activity, ArrayList<Team> teamsData, VolleyService volleyService) {
         this.activity = activity;
         this.teamsData = teamsData;
         this.volleyService = volleyService;
     }
 
+    /**
+     * inflates custom selected_team_view
+     *
+     * @param parent   parent view group
+     * @param viewType view type
+     * @return adapter view holder
+     */
     @Override
     public TeamsSelectedAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                                 int viewType) {
@@ -61,11 +79,20 @@ public class TeamsSelectedAdapter extends RecyclerView.Adapter<TeamsSelectedAdap
         return vh;
     }
 
+    /**
+     * displays the team name and photograph
+     * has an option to remove the favorite by clicking on minus icon
+     * on removal updates the dataset and notifies the change
+     * uses shared preferences to manage favorites
+     *
+     * @param holder   reference to view
+     * @param position position in the recycler view
+     */
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
         String teamNameText = teamsData.get(position).getTeamName();
-        if(teamNameText.length()>10){
+        if (teamNameText.length() > 10) {
             teamNameText = teamNameText.substring(0, 7) + "..";
         }
         holder.teamNameView.setText(teamNameText);
@@ -81,9 +108,9 @@ public class TeamsSelectedAdapter extends RecyclerView.Adapter<TeamsSelectedAdap
 
                 Gson gson = new Gson();
 
-                for(String teamJson : selectedTeams){
+                for (String teamJson : selectedTeams) {
                     Team team = gson.fromJson(teamJson, Team.class);
-                    if(team.getTeamId().equals(teamsData.get(position).getTeamId())){
+                    if (team.getTeamId().equals(teamsData.get(position).getTeamId())) {
                         selectedTeams.remove(teamJson);
                         break;
                     }
@@ -94,7 +121,7 @@ public class TeamsSelectedAdapter extends RecyclerView.Adapter<TeamsSelectedAdap
                 editor.commit();
 
 
-                Toast.makeText(activity, teamName+" removed from favorites!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, teamName + " removed from favorites!", Toast.LENGTH_SHORT).show();
 
                 TeamSelection reference = (TeamSelection) activity;
                 reference.adjustRemovedFavorite(teamsData.get(position));
@@ -103,9 +130,7 @@ public class TeamsSelectedAdapter extends RecyclerView.Adapter<TeamsSelectedAdap
                 teamsData.remove(position);
                 notifyDataSetChanged();
 
-                Log.d("Above Here!1", getItemCount()+"");
-
-                if(getItemCount()==0){
+                if (getItemCount() == 0) {
                     SharedPreferences favTeamPreferences = activity.getSharedPreferences(LATEST_FAV_TEAM, MODE_PRIVATE);
 
 
@@ -122,12 +147,22 @@ public class TeamsSelectedAdapter extends RecyclerView.Adapter<TeamsSelectedAdap
         });
     }
 
+    /**
+     * number of items in the array list
+     *
+     * @return number of items in the favorite teams list
+     */
     @Override
     public int getItemCount() {
         return teamsData.size();
     }
 
-    public void updateTeamsData(ArrayList<Team> teamsData){
+    /**
+     * sets the updated team data
+     *
+     * @param teamsData updated teams data for the favorite bar
+     */
+    public void updateTeamsData(ArrayList<Team> teamsData) {
         this.teamsData = teamsData;
     }
 
