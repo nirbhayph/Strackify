@@ -27,7 +27,7 @@
 - Emoji Twitter (@emoji) - For showing emoji text in countries list
 
 ## Other Commons Used
-- Recyceler View
+- Recycler View
 - Card View
 - Bottom Navigation 
 
@@ -38,7 +38,7 @@
 - The project has one home activity, which is the crux of the application comprising of the past events, upcoming events, about team and settings fragment. 
 - In addition to this there is the sign in, splash, intro, sport, country and finally team selection activity, which help the user with the walkthrough and selection of favorites to display on the home activity mentioned above. 
 - There are search options placed for the user wherever possible. 
-- Unsplash is used in the app when images are not recieved from the api. Random keywords relating to the event or sport are used to display the images. 
+- Unsplash is used in the app when images are not received from the api. Random keywords relating to the event or sport are used to display the images. 
 - Volley has been used for requesting data from the api. 
 - MVVM pattern has been used within the home activity class by creating observables with the View Model class for a fragment. 
 - The code has been packaged into 5 main packages (adapter, authentication, ui, utility, model). You can see the project structure to get a detailed idea of that. 
