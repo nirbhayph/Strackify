@@ -1,0 +1,10 @@
+com.sportstracking.strackify
+com.sportstracking.strackify.adapter
+com.sportstracking.strackify.authentication
+com.sportstracking.strackify.model
+com.sportstracking.strackify.ui
+com.sportstracking.strackify.ui.aboutteam
+com.sportstracking.strackify.ui.pastevents
+com.sportstracking.strackify.ui.settings
+com.sportstracking.strackify.ui.upcomingevents
+com.sportstracking.strackify.utility
