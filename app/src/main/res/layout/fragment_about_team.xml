@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Author - Nirbhay Ashok Pherwani
+Email - pherwani37@gmail.com
+Profile - https://nirbhay.me
+
+About team fragment with recycler view on home screen -->
 <LinearLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
@@ -10,8 +16,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:paddingBottom="64dp" />
-
+        android:paddingBottom="@dimen/extra_padding" />
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
     <include layout="@layout/team_description"/>
+</ScrollView>
 
 </LinearLayout>

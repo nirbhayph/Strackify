@@ -1,5 +1,14 @@
 package com.sportstracking.strackify.model;
 
+/**
+ * strackify: model class for country
+ *
+ * @author Nirbhay Ashok Pherwani
+ * email: np5318@rit.edu
+ * profile: https://nirbhay.me
+ */
+
+
 public class Country {
     private String countryName;
     private String countryCode;

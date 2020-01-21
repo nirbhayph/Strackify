@@ -30,6 +30,7 @@ import java.util.Set;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.sportstracking.strackify.utility.Constants.FAV_CHECKER;
 import static com.sportstracking.strackify.utility.Constants.LATEST_FAV_TEAM;
 import static com.sportstracking.strackify.utility.Constants.LATEST_FAV_TEAM_NAME;
 
@@ -114,12 +115,12 @@ public class TeamsSelectedAdapter extends RecyclerView.Adapter<TeamsSelectedAdap
 
                     SharedPreferences.Editor favEditor = favTeamPreferences.edit();
 
-                    favEditor.putString(LATEST_FAV_TEAM, "FAV_TEAM");
-                    favEditor.putString(LATEST_FAV_TEAM_NAME, "FAV_TEAM");
+                    favEditor.putString(LATEST_FAV_TEAM, FAV_CHECKER);
+                    favEditor.putString(LATEST_FAV_TEAM_NAME, FAV_CHECKER);
 
                     favEditor.commit();
 
-                    favTeamPreferences.getString("LATEST_FAV_TEAM", "DEFAULT");
+                    favTeamPreferences.getString(LATEST_FAV_TEAM, Constants.DEFAULT);
                 }
             }
         });

@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Author - Nirbhay Ashok Pherwani
+Email - pherwani37@gmail.com
+Profile - https://nirbhay.me
+
+For Settings Fragment. Has a number of options availble for the user along with showing him his profile details. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">

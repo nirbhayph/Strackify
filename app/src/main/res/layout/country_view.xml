@@ -1,32 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Author - Nirbhay Ashok Pherwani
+Email - pherwani37@gmail.com
+Profile - https://nirbhay.me
+
+Country view is used to populate countries with their respective flags on the county selection page -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/activity_vertical_spacing"
     android:layout_marginHorizontal="@dimen/activity_horizontal_spacing"
+    android:layout_marginTop="@dimen/activity_vertical_spacing"
+    android:orientation="vertical"
     android:paddingVertical="@dimen/vertical_padding">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <com.vanniktech.emoji.EmojiTextView
-        android:id="@+id/countryName"
-        android:layout_width="wrap_content"
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/textColor"
-        android:textStyle="normal"
-        android:textSize="@dimen/medium_text_size"
-        android:paddingVertical="@dimen/vertical_padding"
-        android:layout_weight="1"
-        />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/baseline_arrow_forward_ios_black_18"
-        android:backgroundTint="@color/secondaryTextColor"
-        />
-</LinearLayout>
-    <View android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+        <com.vanniktech.emoji.EmojiTextView
+            android:id="@+id/countryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="@dimen/vertical_padding"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/medium_text_size"
+            android:textStyle="normal" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/baseline_arrow_forward_ios_black_18"
+            android:backgroundTint="@color/secondaryTextColor" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
         android:layout_height="@dimen/separator_height"
-        android:background="@color/gray"
-        android:layout_marginTop="@dimen/vertical_view_margin"/>
+        android:layout_marginTop="@dimen/vertical_view_margin"
+        android:background="@color/gray" />
 </LinearLayout>

@@ -155,6 +155,7 @@ public class SettingsFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), SignInActivity.class);
                 intent.putExtra(Constants.SIGN_OUT, Constants.SIGN_OUT);
                 startActivity(intent);
+                getActivity().finishAffinity();
             }
         });
     }

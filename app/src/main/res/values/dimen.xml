@@ -3,7 +3,7 @@
     <dimen name="button_padding">20dp</dimen>
     <dimen name="header_text">20dp</dimen>
     <dimen name="vertical_view_margin">16dp</dimen>
-    <dimen name="vertical_separator_margin">8dp</dimen>
+    <dimen name="separator_margin">8dp</dimen>
     <dimen name="normal_text_size">14dp</dimen>
     <dimen name="medium_text_size">16dp</dimen>
     <dimen name="vertical_padding">2dp</dimen>
@@ -11,9 +11,9 @@
     <dimen name="small_margin">4dp</dimen>
     <dimen name="medium_margin">8dp</dimen>
     <dimen name="team_thumb_height">210dp</dimen>
-    <dimen name="activity_extra_horizontal_spacing">24dp</dimen>
+    <dimen name="activity_extra_spacing">24dp</dimen>
     <dimen name="card_corner_radius">2dp</dimen>
-    <dimen name="card_elevation">3dp</dimen>
+    <dimen name="elevation_or_padding">3dp</dimen>
     <dimen name="thumb_circle_dims">100dp</dimen>
     <dimen name="sport_border">4dp</dimen>
     <dimen name="sport_elevation">4dp</dimen>
@@ -21,4 +21,14 @@
     <dimen name="team_elevation">2dp</dimen>
     <dimen name="team_border">1dp</dimen>
     <dimen name="no_dims">0dp</dimen>
+    <dimen name="sign_in_header_text">48dp</dimen>
+    <dimen name="sign_in_logo_dims">128dp</dimen>
+    <dimen name="sign_in_margin">28dp</dimen>
+    <dimen name="sign_in_button_spacing">116dp</dimen>
+    <dimen name="sign_in_button_drawable_padding">10dp</dimen>
+    <dimen name="team_card_elevation">8dp</dimen>
+    <dimen name="team_card_padding">8dp</dimen>
+    <dimen name="team_card_corner_radius">5dp</dimen>
+    <dimen name="margin_medium">12dp</dimen>
+    <dimen name="extra_padding">64dp</dimen>
 </resources>

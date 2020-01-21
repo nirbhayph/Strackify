@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Author - Nirbhay Ashok Pherwani
+Email - pherwani37@gmail.com
+Profile - https://nirbhay.me
+
+This is the sign in activity. This uses the firebase google sign in service to authenticate the user.
+Also, Unsplash random images have been used to set the background image for this screen -->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,10 +20,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Strackify"
-        android:textStyle="bold|italic"
-        android:textSize="48dp"
+        android:text="@string/app_name"
         android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/sign_in_header_text"
+        android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -23,10 +31,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
+        android:layout_width="@dimen/sign_in_logo_dims"
+        android:layout_height="@dimen/sign_in_logo_dims"
+        android:layout_marginEnd="@dimen/sign_in_margin"
+        android:layout_marginRight="@dimen/sign_in_margin"
         android:src="@drawable/baseline_sports_volleyball_black_48"
         android:tint="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/textView"
@@ -36,10 +44,10 @@
         android:id="@+id/signInButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="@dimen/sign_in_button_spacing"
         android:background="@drawable/custom_button"
         android:drawableRight="@drawable/baseline_sports_volleyball_24"
-        android:drawablePadding="10dp"
+        android:drawablePadding="@dimen/sign_in_button_drawable_padding"
         android:drawableTint="@color/white"
         android:paddingHorizontal="@dimen/button_padding"
         android:text="Google Sign In"

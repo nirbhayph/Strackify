@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Author - Nirbhay Ashok Pherwani
+Email - pherwani37@gmail.com
+Profile - https://nirbhay.me
+
+Team selection activity which includes the recycler view for populating teams obtained from the
+API using sport and country selected by user. Users can choose their favorites and manage them from the
+favorites recycler view. -->
+
+
 <RelativeLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,15 +24,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
+        android:paddingBottom="@dimen/team_card_padding"
         android:background="@color/backgroundGrey">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/white"
-        card_view:cardCornerRadius="5dp"
-        card_view:cardElevation="8dp"
-        android:layout_margin="8dp"
+        card_view:cardCornerRadius="@dimen/team_card_corner_radius"
+        card_view:cardElevation="@dimen/team_card_elevation"
+        android:layout_margin="@dimen/medium_margin"
         >
         <LinearLayout
             android:orientation="vertical"
@@ -35,13 +45,13 @@
                 android:text="@string/favorites_text"
                 android:gravity="left|center_vertical"
                 android:layout_marginLeft="@dimen/activity_horizontal_spacing"
-                android:layout_marginTop="@dimen/vertical_separator_margin"
+                android:layout_marginTop="@dimen/separator_margin"
                 android:textColor="@color/textColor"
                 android:textStyle="bold"/>
 
             <View android:layout_width="match_parent"
                 android:layout_height="@dimen/separator_height"
-                android:layout_marginTop="@dimen/vertical_separator_margin"
+                android:layout_marginTop="@dimen/separator_margin"
                 android:background="@color/separatorColor"/>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -95,7 +105,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/oops_error"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="@dimen/activity_extra_spacing"
             android:visibility="gone"
             android:id="@+id/notFoundImage"
             />
@@ -105,7 +115,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/medium_text_size"
         android:textStyle="normal"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/activity_vertical_spacing"
         android:text="No teams found :( \nTry another search combination!"
         android:textColor="@color/gray"
         android:visibility="visible"
@@ -119,12 +129,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginBottom="@dimen/activity_vertical_spacing"
+        android:layout_marginRight="@dimen/activity_horizontal_spacing"
         android:src="@drawable/baseline_arrow_forward_ios_black_36"
         android:tint="@color/white"
         app:backgroundTint="@color/colorAccent"
-        app:borderWidth="0dp"
+        app:borderWidth="@dimen/no_dims"
         app:elevation="6dp"
         app:fabSize="normal"/>
 

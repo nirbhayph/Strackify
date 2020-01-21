@@ -1,5 +1,14 @@
 package com.sportstracking.strackify.model;
 
+/**
+ * strackify: model class for upcoming event
+ *
+ * @author Nirbhay Ashok Pherwani
+ * email: np5318@rit.edu
+ * profile: https://nirbhay.me
+ */
+
+
 public class UpcomingEvent {
     private String eventId;
     private String eventName;
@@ -7,6 +16,11 @@ public class UpcomingEvent {
     private String eventDescription;
     private String eventDate;
     private String eventLeague;
+    private String eventTime;
+    private String homeTeam;
+    private String awayTeam;
+    private String homeScore;
+    private String awayScore;
 
     public String getEventTime() {
         return eventTime;
@@ -47,12 +61,6 @@ public class UpcomingEvent {
     public void setAwayScore(String awayScore) {
         this.awayScore = awayScore;
     }
-
-    private String eventTime;
-    private String homeTeam;
-    private String awayTeam;
-    private String homeScore;
-    private String awayScore;
 
     public String getEventId() {
         return eventId;

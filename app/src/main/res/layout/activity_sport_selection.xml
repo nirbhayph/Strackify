@@ -26,7 +26,7 @@ Users can choose their choice of sport. -->
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/separator_height"
-        android:layout_marginTop="@dimen/vertical_separator_margin"
+        android:layout_marginTop="@dimen/separator_margin"
         android:background="@color/separatorColor" />
 
     <androidx.recyclerview.widget.RecyclerView

@@ -79,7 +79,7 @@ public class UpcomingEventsViewModel extends AndroidViewModel {
 
                 }
                 else{
-                    upcomingEvent.setEventThumbnail("https://images.unsplash.com/photo-1563882757905-21bd5e0875fe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80");
+                    upcomingEvent.setEventThumbnail("https://source.unsplash.com/1500x300/?"+upcomingEvent.getHomeTeam()+","+upcomingEvent.getAwayTeam()+","+upcomingEvent.getEventLeague());
                 }
                 upcomingEventsArrayList.add(upcomingEvent);
             }
@@ -113,12 +113,10 @@ public class UpcomingEventsViewModel extends AndroidViewModel {
 
     public void makeDataRequest(){
         SharedPreferences sharedPref = getApplication().getApplicationContext().getSharedPreferences(Constants.LATEST_FAV_TEAM, Context.MODE_PRIVATE);
-        String favoriteTeamId = sharedPref.getString(Constants.LATEST_FAV_TEAM, "FAV_TEAM");
+        String favoriteTeamId = sharedPref.getString(Constants.LATEST_FAV_TEAM, Constants.FAV_CHECKER);
         teamName.setValue(sharedPref.getString(Constants.LATEST_FAV_TEAM_NAME, ""));
         volleyService = new VolleyService(this, Constants.UPCOMING_EVENTS_DISPLAY, getApplication().getApplicationContext());
         volleyService.makeRequest(Constants.UPCOMING_EVENTS + Constants.TEAM_ID_IDENTIFIER + favoriteTeamId);
-        Log.d("URL_UPCOMING", Constants.UPCOMING_EVENTS + Constants.TEAM_ID_IDENTIFIER + favoriteTeamId);
-
     }
 
 }

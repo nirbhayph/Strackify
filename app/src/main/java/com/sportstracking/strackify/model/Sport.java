@@ -1,5 +1,14 @@
 package com.sportstracking.strackify.model;
 
+/**
+ * strackify: model class for sport
+ *
+ * @author Nirbhay Ashok Pherwani
+ * email: np5318@rit.edu
+ * profile: https://nirbhay.me
+ */
+
+
 public class Sport {
     private String sportName;
     private String sportId;

@@ -145,6 +145,17 @@ public class TeamSelection extends AppCompatActivity {
                     team.setTeamCountry(teamItem.getString("strCountry"));
                     team.setSportName(teamItem.getString("strSport"));
                     team.setTeamId(teamItem.getString("idTeam"));
+                    team.setYoutube(teamItem.getString("strYoutube"));
+                    team.setInstagram(teamItem.getString("strInstagram"));
+                    team.setFacebook(teamItem.getString("strFacebook"));
+                    team.setTwitter(teamItem.getString("strTwitter"));
+                    team.setFanArt(teamItem.getString("strTeamFanart1"));
+                    team.setWebsite(teamItem.getString("strWebsite"));
+                    team.setFormedYear(teamItem.getString("intFormedYear"));
+                    team.setGender(teamItem.getString("strGender"));
+                    team.setLeagueName(teamItem.getString("strLeague"));
+                    team.setStadium(teamItem.getString("strStadium"));
+                    team.setTeamLogo(teamItem.getString("strTeamLogo"));
                     teams.add(team);
                 }
             }

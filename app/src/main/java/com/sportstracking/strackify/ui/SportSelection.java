@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static com.sportstracking.strackify.utility.Constants.FAV_CHECKER;
 import static com.sportstracking.strackify.utility.Constants.LATEST_FAV_TEAM;
 
 public class SportSelection extends AppCompatActivity {
@@ -75,12 +76,11 @@ public class SportSelection extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
-
         SharedPreferences preferences = getSharedPreferences(LATEST_FAV_TEAM, MODE_PRIVATE);
-        String latestFavTeam = preferences.getString(LATEST_FAV_TEAM, "FAV_TEAM");
-        if(latestFavTeam.equals("FAV_TEAM")){
+        String latestFavTeam = preferences.getString(LATEST_FAV_TEAM, FAV_CHECKER);
+        if(latestFavTeam.equals(FAV_CHECKER)){
             this.moveTaskToBack(true);
+            this.finishAffinity();
         }
     }
 }

@@ -1,5 +1,13 @@
 package com.sportstracking.strackify.model;
 
+/**
+ * strackify: model class for team
+ *
+ * @author Nirbhay Ashok Pherwani
+ * email: np5318@rit.edu
+ * profile: https://nirbhay.me
+ */
+
 public class Team {
     private String teamId;
     private String teamName;
@@ -24,6 +32,24 @@ public class Team {
     private String teamLogo;
     private String youtube;
     private String teamCountry;
+    private String fanArt;
+    private String gender;
+
+    public String getFanArt() {
+        return fanArt;
+    }
+
+    public void setFanArt(String fanArt) {
+        this.fanArt = fanArt;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
     public String getTeamCountry() {
         return teamCountry;

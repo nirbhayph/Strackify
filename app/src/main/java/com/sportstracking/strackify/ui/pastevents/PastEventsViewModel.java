@@ -12,6 +12,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.Gson;
+import com.sportstracking.strackify.authentication.SignInActivity;
 import com.sportstracking.strackify.model.PastEvent;
 import com.sportstracking.strackify.model.Team;
 import com.sportstracking.strackify.utility.Constants;
@@ -77,7 +78,7 @@ public class PastEventsViewModel extends AndroidViewModel {
                     pastEvent.setEventThumbnail(pastEventItem.get("strThumb").toString());
                 }
                 else{
-                    pastEvent.setEventThumbnail("https://images.unsplash.com/photo-1563882757905-21bd5e0875fe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80");
+                    pastEvent.setEventThumbnail("https://source.unsplash.com/1500x300/?"+pastEvent.getHomeTeam()+","+pastEvent.getAwayTeam()+","+pastEvent.getEventLeague());
                 }
                 pastEventsArrayList.add(pastEvent);
             }
@@ -109,11 +110,12 @@ public class PastEventsViewModel extends AndroidViewModel {
 
     public void makeDataRequest(){
         SharedPreferences sharedPref = getApplication().getApplicationContext().getSharedPreferences(Constants.LATEST_FAV_TEAM, Context.MODE_PRIVATE);
-        String favoriteTeamId = sharedPref.getString(Constants.LATEST_FAV_TEAM, "FAV_TEAM");
+        String favoriteTeamId = sharedPref.getString(Constants.LATEST_FAV_TEAM, Constants.FAV_CHECKER);
         teamName.setValue(sharedPref.getString(Constants.LATEST_FAV_TEAM_NAME, ""));
         volleyService = new VolleyService(this, Constants.PAST_EVENTS_DISPLAY, getApplication().getApplicationContext());
         volleyService.makeRequest(Constants.PAST_EVENTS + Constants.TEAM_ID_IDENTIFIER + favoriteTeamId);
-        Log.d("URL_PAST", Constants.PAST_EVENTS + Constants.TEAM_ID_IDENTIFIER + favoriteTeamId);
+
+        Log.d(Constants.LATEST_FAV_TEAM, "THE TEAM");
 
     }
 
