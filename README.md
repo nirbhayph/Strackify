@@ -10,6 +10,8 @@
 
 - Landing Page Link - 
 
+- App Screenshots - Visit last section of this file. 
+
 - Link to Project Structure - https://nirbhay.me/Strackify/structure.html
 
 - Link to JavaDoc - https://nirbhay.me/Strackify/javadoc/
