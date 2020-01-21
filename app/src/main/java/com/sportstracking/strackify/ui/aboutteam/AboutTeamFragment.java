@@ -225,10 +225,13 @@ public class AboutTeamFragment extends Fragment {
      */
     private void openLink(String url) {
         try {
+            if(!url.contains("http")){
+                url = "http://"+url;
+            }
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            startActivity(browserIntent);
+            getActivity().startActivity(browserIntent);
         } catch (Exception e) {
-            Toast.makeText(getActivity().getApplicationContext(), "Cannot open the url!", Toast.LENGTH_SHORT);
+            Toast.makeText(getActivity().getApplicationContext(), "Cannot open the url!", Toast.LENGTH_SHORT).show();
         }
     }
 
