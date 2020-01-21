@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sportstracking.strackify.ui.CountrySelection;
 import com.sportstracking.strackify.R;
 import com.sportstracking.strackify.model.Sport;
-import com.sportstracking.strackify.utility.Constants;
+import com.sportstracking.strackify.utility.Values;
 import com.sportstracking.strackify.utility.VolleyService;
 
 import java.util.ArrayList;
@@ -58,7 +57,7 @@ public class SportSelectionAdapter extends RecyclerView.Adapter<SportSelectionAd
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity, CountrySelection.class);
-                intent.putExtra(Constants.SPORTS_SELECTION, sportsData.get(position).getSportName());
+                intent.putExtra(Values.SPORTS_SELECTION, sportsData.get(position).getSportName());
                 activity.startActivity(intent);
             }
         });

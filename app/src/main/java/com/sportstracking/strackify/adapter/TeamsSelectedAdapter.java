@@ -1,14 +1,11 @@
 package com.sportstracking.strackify.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,21 +15,20 @@ import com.google.gson.Gson;
 import com.sportstracking.strackify.R;
 import com.sportstracking.strackify.model.Team;
 import com.sportstracking.strackify.ui.TeamSelection;
-import com.sportstracking.strackify.utility.Constants;
+import com.sportstracking.strackify.utility.Values;
 import com.sportstracking.strackify.utility.VolleyService;
 
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.sportstracking.strackify.utility.Constants.FAV_CHECKER;
-import static com.sportstracking.strackify.utility.Constants.LATEST_FAV_TEAM;
-import static com.sportstracking.strackify.utility.Constants.LATEST_FAV_TEAM_NAME;
+import static com.sportstracking.strackify.utility.Values.FAV_CHECKER;
+import static com.sportstracking.strackify.utility.Values.LATEST_FAV_TEAM;
+import static com.sportstracking.strackify.utility.Values.LATEST_FAV_TEAM_NAME;
 
 public class TeamsSelectedAdapter extends RecyclerView.Adapter<TeamsSelectedAdapter.MyViewHolder> {
     private ArrayList<Team> teamsData;
@@ -80,8 +76,8 @@ public class TeamsSelectedAdapter extends RecyclerView.Adapter<TeamsSelectedAdap
             public void onClick(View view) {
                 String teamName = teamsData.get(position).getTeamName();
 
-                SharedPreferences preferences = activity.getSharedPreferences(Constants.FAV_TEAMS, MODE_PRIVATE);
-                Set<String> selectedTeams = new LinkedHashSet<>(preferences.getStringSet(Constants.FAV_TEAMS, new LinkedHashSet<String>()));
+                SharedPreferences preferences = activity.getSharedPreferences(Values.FAV_TEAMS, MODE_PRIVATE);
+                Set<String> selectedTeams = new LinkedHashSet<>(preferences.getStringSet(Values.FAV_TEAMS, new LinkedHashSet<String>()));
 
                 Gson gson = new Gson();
 
@@ -94,7 +90,7 @@ public class TeamsSelectedAdapter extends RecyclerView.Adapter<TeamsSelectedAdap
                 }
 
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putStringSet(Constants.FAV_TEAMS, selectedTeams);
+                editor.putStringSet(Values.FAV_TEAMS, selectedTeams);
                 editor.commit();
 
 
@@ -120,7 +116,7 @@ public class TeamsSelectedAdapter extends RecyclerView.Adapter<TeamsSelectedAdap
 
                     favEditor.commit();
 
-                    favTeamPreferences.getString(LATEST_FAV_TEAM, Constants.DEFAULT);
+                    favTeamPreferences.getString(LATEST_FAV_TEAM, Values.DEFAULT);
                 }
             }
         });

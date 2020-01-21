@@ -1,5 +1,16 @@
 package com.sportstracking.strackify.ui.upcomingevents;
 
+/**
+ * strackify: upcoming events fragment
+ * has observable attached to retrieve data updates from the view model
+ * populates upcoming events in a recycler view
+ * populates favorites in a story like recycler view for the user to choose from
+ *
+ * @author Nirbhay Ashok Pherwani
+ * email: np5318@rit.edu
+ * profile: https://nirbhay.me
+ */
+
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,16 +32,14 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.sportstracking.strackify.R;
 import com.sportstracking.strackify.adapter.FavoriteTeamsAdapter;
 import com.sportstracking.strackify.adapter.UpcomingEventsAdapter;
 import com.sportstracking.strackify.model.Team;
 import com.sportstracking.strackify.model.UpcomingEvent;
 import com.sportstracking.strackify.ui.SportSelection;
-import com.sportstracking.strackify.utility.Constants;
+import com.sportstracking.strackify.utility.Values;
 import com.sportstracking.strackify.utility.VolleyService;
-
 import java.util.ArrayList;
 
 public class UpcomingEventsFragment extends Fragment {
@@ -53,10 +61,9 @@ public class UpcomingEventsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         upcomingEventsViewModel =
                 ViewModelProviders.of(this).get(UpcomingEventsViewModel.class);
-        if(getView()!=null){
+        if (getView() != null) {
             root = getView();
-        }
-        else{
+        } else {
             root = inflater.inflate(R.layout.fragment_upcoming_events, container, false);
             setup();
         }
@@ -69,14 +76,22 @@ public class UpcomingEventsFragment extends Fragment {
         setup();
     }
 
-    public void setup(){
+    /**
+     * makes calls to data observer and setting the data view function
+     */
+    public void setup() {
         setHasOptionsMenu(true);
         setupDataView();
         setupDataObserver();
     }
 
-    private void setupDataView(){
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("  Upcoming Events");
+    /**
+     * sets up both the recycler views
+     * sets the layout for both
+     * on pressing add user is taken through the process of adding another favorite
+     */
+    private void setupDataView() {
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("  Upcoming Events");
 
         upcomingEventsRecyclerView = root.findViewById(R.id.upcoming_events_recycler_view);
         upcomingEventsRecyclerView.setHasFixedSize(true);
@@ -101,35 +116,46 @@ public class UpcomingEventsFragment extends Fragment {
         });
     }
 
-    public void makeNewRequest(String teamId, String teamName){
-        SharedPreferences sharedPref = getActivity().getApplicationContext().getSharedPreferences(Constants.LATEST_FAV_TEAM, Context.MODE_PRIVATE);
+    /**
+     * makes a request to the view model for obtaining data for a
+     * particular favorite team clicked by the user
+     *
+     * @param teamId   team id which events are required
+     * @param teamName team name for which events are required
+     */
+    public void makeNewRequest(String teamId, String teamName) {
+        SharedPreferences sharedPref = getActivity().getApplicationContext().getSharedPreferences(Values.LATEST_FAV_TEAM, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(Constants.LATEST_FAV_TEAM, teamId);
-        editor.putString(Constants.LATEST_FAV_TEAM_NAME, teamName);
+        editor.putString(Values.LATEST_FAV_TEAM, teamId);
+        editor.putString(Values.LATEST_FAV_TEAM_NAME, teamName);
         editor.commit();
 
         upcomingEventsViewModel.makeDataRequest();
     }
 
-    public void setupDataObserver(){
+    /**
+     * sets up the data observer for getting the upcoming events, favorites and team name to set the header
+     * also sets an observer for no data found for an event. changes ui accordingly
+     */
+    public void setupDataObserver() {
 
         upcomingEventsViewModel.getUpcomingEvent().observe(this, new Observer<ArrayList<UpcomingEvent>>() {
             @Override
-            public void onChanged(@Nullable ArrayList<UpcomingEvent> upcomingEvents ) {
+            public void onChanged(@Nullable ArrayList<UpcomingEvent> upcomingEvents) {
                 updateUpcomingEvents(upcomingEvents);
             }
         });
 
         upcomingEventsViewModel.getFavorites().observe(this, new Observer<ArrayList<Team>>() {
             @Override
-            public void onChanged(@Nullable ArrayList<Team> teams ) {
+            public void onChanged(@Nullable ArrayList<Team> teams) {
                 updateFavorites(teams);
             }
         });
 
         upcomingEventsViewModel.getTeamName().observe(this, new Observer<String>() {
             @Override
-            public void onChanged(@Nullable String team ) {
+            public void onChanged(@Nullable String team) {
                 TextView title = root.findViewById(R.id.teamsHeaderText);
                 title.setText(team);
             }
@@ -137,15 +163,14 @@ public class UpcomingEventsFragment extends Fragment {
 
         upcomingEventsViewModel.getNotFoundStatus().observe(this, new Observer<Boolean>() {
             @Override
-            public void onChanged(@Nullable Boolean status ) {
+            public void onChanged(@Nullable Boolean status) {
                 TextView notFoundMessage = root.findViewById(R.id.notFoundMessage);
                 ImageView notFoundImage = root.findViewById(R.id.notFoundImage);
 
-                if(status){
+                if (status) {
                     notFoundMessage.setVisibility(View.VISIBLE);
                     notFoundImage.setVisibility(View.VISIBLE);
-                }
-                else{
+                } else {
                     notFoundImage.setVisibility(View.GONE);
                     notFoundMessage.setVisibility(View.GONE);
                 }
@@ -153,28 +178,51 @@ public class UpcomingEventsFragment extends Fragment {
         });
     }
 
-    public void updateFavorites(ArrayList<Team> favorites){
+    /**
+     * stores the favorites
+     * makes a call to update the favorites bar
+     *
+     * @param favorites list of favorites selected by user
+     */
+    public void updateFavorites(ArrayList<Team> favorites) {
         this.favorites = favorites;
         updateFavoritesBar();
     }
 
-    public void updateFavoritesBar(){
-        favoriteTeamsAdapter = new FavoriteTeamsAdapter(getActivity(), favorites, new VolleyService(getActivity(), Constants.FAV_TEAMS), this, Constants.UPCOMING_EVENTS);
+    /**
+     * sets the adapter for the recycler view with the favorites data
+     */
+    public void updateFavoritesBar() {
+        favoriteTeamsAdapter = new FavoriteTeamsAdapter(getActivity(), favorites, new VolleyService(getActivity(), Values.FAV_TEAMS), this, Values.UPCOMING_EVENTS);
         favoriteTeamsRecyclerView.setAdapter(favoriteTeamsAdapter);
     }
 
-    public void updateUpcomingEvents(ArrayList<UpcomingEvent> upcomingEvents){
+    /**
+     * stores the upcoming events
+     * makes a call to update the ui with the upcoming events stores
+     *
+     * @param upcomingEvents upcoming events data
+     */
+    public void updateUpcomingEvents(ArrayList<UpcomingEvent> upcomingEvents) {
         this.upcomingEvents = upcomingEvents;
         updateUI();
     }
 
-    public void updateUI(){
-        volleyService = new VolleyService(getActivity(), Constants.UPCOMING_EVENTS_DISPLAY);
-
+    /**
+     * sets the adapter for the recycler view with the upcoming events data
+     */
+    public void updateUI() {
+        volleyService = new VolleyService(getActivity(), Values.UPCOMING_EVENTS_DISPLAY);
         upcomingEventsAdpater = new UpcomingEventsAdapter(getActivity(), upcomingEvents, volleyService);
         upcomingEventsRecyclerView.setAdapter(upcomingEventsAdpater);
     }
 
+    /**
+     * for searching from events populated for the selected favorite
+     *
+     * @param menu menu on action bar
+     * @return return true or false after menu inflated
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -195,9 +243,9 @@ public class UpcomingEventsFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                try{
+                try {
                     upcomingEventsAdpater.getFilter().filter(newText);
-                }catch (Exception e){
+                } catch (Exception e) {
                     return false;
                 }
                 return false;

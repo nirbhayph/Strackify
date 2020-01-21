@@ -37,11 +37,11 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.sportstracking.strackify.R;
 import com.sportstracking.strackify.ui.Home;
 import com.sportstracking.strackify.ui.SportSelection;
-import com.sportstracking.strackify.utility.Constants;
+import com.sportstracking.strackify.utility.Values;
 import com.sportstracking.strackify.utility.VolleyService;
-import static com.sportstracking.strackify.utility.Constants.FAV_CHECKER;
-import static com.sportstracking.strackify.utility.Constants.LATEST_FAV_TEAM;
-import static com.sportstracking.strackify.utility.Constants.SIGN_OUT;
+import static com.sportstracking.strackify.utility.Values.FAV_CHECKER;
+import static com.sportstracking.strackify.utility.Values.LATEST_FAV_TEAM;
+import static com.sportstracking.strackify.utility.Values.SIGN_OUT;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -192,11 +192,11 @@ public class SignInActivity extends AppCompatActivity {
 
             // updates values used to differentiate users based on
             // uid for retrieving data from shared preferences
-            Constants.LATEST_FAV_TEAM = "LATEST_FAV_TEAM" + user.getUid();
-            Constants.LATEST_FAV_TEAM_NAME = "LATEST_FAV_TEAM_NAME" + user.getUid();
-            Constants.FAV_TEAMS = "FAV_TEAMS" + user.getUid();
-            Constants.FAV_CHECKER = "FAV_TEAM" + user.getUid();
-            Constants.DEFAULT = "DEFAULT" + user.getUid();
+            Values.LATEST_FAV_TEAM = "LATEST_FAV_TEAM" + user.getUid();
+            Values.LATEST_FAV_TEAM_NAME = "LATEST_FAV_TEAM_NAME" + user.getUid();
+            Values.FAV_TEAMS = "FAV_TEAMS" + user.getUid();
+            Values.FAV_CHECKER = "FAV_TEAM" + user.getUid();
+            Values.DEFAULT = "DEFAULT" + user.getUid();
 
             // for stored information retrieval
             SharedPreferences preferences = getSharedPreferences(LATEST_FAV_TEAM, MODE_PRIVATE);
@@ -205,13 +205,13 @@ public class SignInActivity extends AppCompatActivity {
             String latestFavTeam = preferences.getString(LATEST_FAV_TEAM, FAV_CHECKER);
 
             // for profile details
-            SharedPreferences userPreferences = getSharedPreferences(Constants.SIGN_IN, MODE_PRIVATE);
+            SharedPreferences userPreferences = getSharedPreferences(Values.SIGN_IN, MODE_PRIVATE);
             SharedPreferences.Editor editor = userPreferences.edit();
 
             // stores in basic profile information
-            editor.putString(Constants.SIGN_IN_EMAIL, user.getEmail().toString());
-            editor.putString(Constants.SIGN_IN_NAME, user.getDisplayName().toString());
-            editor.putString(Constants.SIGN_IN_PROFILE_IMAGE, user.getPhotoUrl().toString());
+            editor.putString(Values.SIGN_IN_EMAIL, user.getEmail().toString());
+            editor.putString(Values.SIGN_IN_NAME, user.getDisplayName().toString());
+            editor.putString(Values.SIGN_IN_PROFILE_IMAGE, user.getPhotoUrl().toString());
 
             editor.commit();
 
@@ -236,7 +236,7 @@ public class SignInActivity extends AppCompatActivity {
      */
     private void changeBackground() {
         ConstraintLayout signInLayout = findViewById(R.id.signInLayout);
-        VolleyService volleyService = new VolleyService(this, Constants.SIGN_IN, getApplicationContext());
+        VolleyService volleyService = new VolleyService(this, Values.SIGN_IN, getApplicationContext());
         volleyService.makeImageRequest("https://source.unsplash.com/900x1600/?basketball", signInLayout);
     }
 }

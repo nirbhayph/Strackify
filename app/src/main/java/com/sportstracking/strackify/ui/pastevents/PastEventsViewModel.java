@@ -1,26 +1,31 @@
 package com.sportstracking.strackify.ui.pastevents;
 
+/**
+ * strackify: past events fragment view model
+ * uses live data for view to create observables
+ * retrieves data to populate past events
+ * retrieved data from shared preferences to populate favorites
+ * uses live data for storage which can then be used by fragment to observe
+ *
+ * @author Nirbhay Ashok Pherwani
+ * email: np5318@rit.edu
+ * profile: https://nirbhay.me
+ */
+
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
 import com.google.gson.Gson;
-import com.sportstracking.strackify.authentication.SignInActivity;
 import com.sportstracking.strackify.model.PastEvent;
 import com.sportstracking.strackify.model.Team;
-import com.sportstracking.strackify.utility.Constants;
+import com.sportstracking.strackify.utility.Values;
 import com.sportstracking.strackify.utility.VolleyService;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -42,11 +47,11 @@ public class PastEventsViewModel extends AndroidViewModel {
         makeDataRequest();
     }
 
-    public LiveData<ArrayList<PastEvent>> getPastEvents(){
+    public LiveData<ArrayList<PastEvent>> getPastEvents() {
         return pastEvents;
     }
 
-    public LiveData<ArrayList<Team>> getFavorites(){
+    public LiveData<ArrayList<Team>> getFavorites() {
         return favorites;
     }
 
@@ -54,14 +59,22 @@ public class PastEventsViewModel extends AndroidViewModel {
         return teamName;
     }
 
-    public LiveData<Boolean> getNotFoundStatus() {return notFoundStatus; }
+    public LiveData<Boolean> getNotFoundStatus() {
+        return notFoundStatus;
+    }
 
-    public void updatePastEvents(JSONObject response){
+    /**
+     * called by volley service after data retrieved from api
+     * mutable live data is updated from here which is then reflected in fragment because of
+     * observable on getters above
+     * @param response JSONObject response obtained from api
+     */
+    public void updatePastEvents(JSONObject response) {
 
         ArrayList<PastEvent> pastEventsArrayList = new ArrayList<>();
-        try{
+        try {
             JSONArray pastEventsData = (JSONArray) response.get("results");
-            for(int counter = 0; counter<pastEventsData.length(); counter++){
+            for (int counter = 0; counter < pastEventsData.length(); counter++) {
                 JSONObject pastEventItem = (JSONObject) pastEventsData.get(counter);
                 PastEvent pastEvent = new PastEvent();
                 pastEvent.setEventId(pastEventItem.get("idEvent").toString());
@@ -74,18 +87,16 @@ public class PastEventsViewModel extends AndroidViewModel {
                 pastEvent.setHomeScore(pastEventItem.get("intHomeScore").toString());
                 pastEvent.setHomeTeam(pastEventItem.get("strHomeTeam").toString());
 
-                if(!pastEventItem.get("strThumb").toString().isEmpty() && !pastEventItem.get("strThumb").toString().equals("null") ){
+                if (!pastEventItem.get("strThumb").toString().isEmpty() && !pastEventItem.get("strThumb").toString().equals("null")) {
                     pastEvent.setEventThumbnail(pastEventItem.get("strThumb").toString());
-                }
-                else{
-                    pastEvent.setEventThumbnail("https://source.unsplash.com/1500x300/?"+pastEvent.getHomeTeam()+","+pastEvent.getAwayTeam()+","+pastEvent.getEventLeague());
+                } else {
+                    pastEvent.setEventThumbnail("https://source.unsplash.com/1500x300/?" + pastEvent.getEventName()+",soccer,basketball");
                 }
                 pastEventsArrayList.add(pastEvent);
             }
             notFoundStatus.setValue(false);
             pastEvents.setValue(pastEventsArrayList);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             notFoundStatus.setValue(true);
             Toast.makeText(getApplication(), "No past events found!", Toast.LENGTH_LONG).show();
@@ -93,14 +104,20 @@ public class PastEventsViewModel extends AndroidViewModel {
         }
     }
 
-    public void updateFavorites(){
-        SharedPreferences sharedPreferencesFavorite = getApplication().getSharedPreferences(Constants.FAV_TEAMS, Context.MODE_PRIVATE);
-        Set<String> selectedTeams = new LinkedHashSet<>(sharedPreferencesFavorite.getStringSet(Constants.FAV_TEAMS, new LinkedHashSet<String>()));
+    /**
+     * to retrieve favorites data from shared preferences
+     * uses gson to convert string set of json to team objects
+     * updates mutable live data which is then reflected in
+     * fragment ui because of observable on getters above.
+     */
+    public void updateFavorites() {
+        SharedPreferences sharedPreferencesFavorite = getApplication().getSharedPreferences(Values.FAV_TEAMS, Context.MODE_PRIVATE);
+        Set<String> selectedTeams = new LinkedHashSet<>(sharedPreferencesFavorite.getStringSet(Values.FAV_TEAMS, new LinkedHashSet<String>()));
         Gson gson = new Gson();
 
         ArrayList<Team> favoritesArrayList = new ArrayList<>();
 
-        for(String teamJson : selectedTeams){
+        for (String teamJson : selectedTeams) {
             Team team = gson.fromJson(teamJson, Team.class);
             favoritesArrayList.add(team);
         }
@@ -108,15 +125,16 @@ public class PastEventsViewModel extends AndroidViewModel {
         favorites.setValue(favoritesArrayList);
     }
 
-    public void makeDataRequest(){
-        SharedPreferences sharedPref = getApplication().getApplicationContext().getSharedPreferences(Constants.LATEST_FAV_TEAM, Context.MODE_PRIVATE);
-        String favoriteTeamId = sharedPref.getString(Constants.LATEST_FAV_TEAM, Constants.FAV_CHECKER);
-        teamName.setValue(sharedPref.getString(Constants.LATEST_FAV_TEAM_NAME, ""));
-        volleyService = new VolleyService(this, Constants.PAST_EVENTS_DISPLAY, getApplication().getApplicationContext());
-        volleyService.makeRequest(Constants.PAST_EVENTS + Constants.TEAM_ID_IDENTIFIER + favoriteTeamId);
-
-        Log.d(Constants.LATEST_FAV_TEAM, "THE TEAM");
-
+    /**
+     * volley reference used to request data for past events for
+     * favorite team selected in past events fragment
+     */
+    public void makeDataRequest() {
+        SharedPreferences sharedPref = getApplication().getApplicationContext().getSharedPreferences(Values.LATEST_FAV_TEAM, Context.MODE_PRIVATE);
+        String favoriteTeamId = sharedPref.getString(Values.LATEST_FAV_TEAM, Values.FAV_CHECKER);
+        teamName.setValue(sharedPref.getString(Values.LATEST_FAV_TEAM_NAME, ""));
+        volleyService = new VolleyService(this, Values.PAST_EVENTS_DISPLAY, getApplication().getApplicationContext());
+        volleyService.makeRequest(Values.PAST_EVENTS + Values.TEAM_ID_IDENTIFIER + favoriteTeamId);
     }
 
 }

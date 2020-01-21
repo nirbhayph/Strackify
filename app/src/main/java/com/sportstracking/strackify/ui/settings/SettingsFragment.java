@@ -1,5 +1,23 @@
 package com.sportstracking.strackify.ui.settings;
 
+/**
+ * strackify: settings fragment
+ * displays user's profile information
+ * gives the user a number of options to switch from
+ * manage favorites (add/subtract)
+ * if a developer can contribute to the project
+ * share the app
+ * provide feedback on the play store
+ * logout from the app
+ * acknowledgements and mentions
+ * app walkthrough
+ * developer information
+ *
+ * @author Nirbhay Ashok Pherwani
+ * email: np5318@rit.edu
+ * profile: https://nirbhay.me
+ */
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,42 +27,38 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ShareCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-
-import com.google.firebase.auth.FirebaseAuth;
 import com.sportstracking.strackify.R;
 import com.sportstracking.strackify.authentication.SignInActivity;
 import com.sportstracking.strackify.ui.IntroActivity;
 import com.sportstracking.strackify.ui.SportSelection;
-import com.sportstracking.strackify.utility.Constants;
+import com.sportstracking.strackify.utility.Values;
 import com.sportstracking.strackify.utility.VolleyService;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingsFragment extends Fragment {
 
-    private SettingsViewModel settingsViewModel;
     private View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        settingsViewModel =
-                ViewModelProviders.of(this).get(SettingsViewModel.class);
         root = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("  Settings");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("  Settings");
 
         setupUI();
 
         return root;
     }
 
-    private void setupUI(){
+    /**
+     * sets up the various options
+     * for the user to choose from
+     */
+    private void setupUI() {
         setupProfileDetails();
         setupFavoriteOptions();
         setupAboutDeveloper();
@@ -56,26 +70,31 @@ public class SettingsFragment extends Fragment {
         setupLogout();
     }
 
-    private void setupProfileDetails(){
+    /**
+     * sets the user's profile details (name, email and photograph)
+     */
+    private void setupProfileDetails() {
         TextView profileName = root.findViewById(R.id.profileName);
         TextView profileEmail = root.findViewById(R.id.profileEmail);
         CircleImageView profileThumb = root.findViewById(R.id.profileThumb);
 
-        VolleyService volleyService = new VolleyService(this, Constants.SETTINGS_DISPLAY, getActivity().getApplicationContext());
-        SharedPreferences userPreferences = getActivity().getSharedPreferences(Constants.SIGN_IN, Context.MODE_PRIVATE);
-        String imageUrl = userPreferences.getString(Constants.SIGN_IN_PROFILE_IMAGE, "NA");
-        if(!imageUrl.equals("NA")){
+        VolleyService volleyService = new VolleyService(this, Values.SETTINGS_DISPLAY, getActivity().getApplicationContext());
+        SharedPreferences userPreferences = getActivity().getSharedPreferences(Values.SIGN_IN, Context.MODE_PRIVATE);
+        String imageUrl = userPreferences.getString(Values.SIGN_IN_PROFILE_IMAGE, "NA");
+        if (!imageUrl.equals("NA")) {
             volleyService.makeImageRequest(imageUrl, profileThumb);
-        }
-        else{
+        } else {
             volleyService.makeImageRequest("https://images.unsplash.com/photo-1476169785137-3bfe32e30ee1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80", profileThumb);
         }
 
-        profileName.setText(userPreferences.getString(Constants.SIGN_IN_NAME, ""));
-        profileEmail.setText(userPreferences.getString(Constants.SIGN_IN_EMAIL, ""));
+        profileName.setText(userPreferences.getString(Values.SIGN_IN_NAME, ""));
+        profileEmail.setText(userPreferences.getString(Values.SIGN_IN_EMAIL, ""));
     }
 
-    private void setupFavoriteOptions(){
+    /**
+     * user can manage their favorites from here (add/remove)
+     */
+    private void setupFavoriteOptions() {
         TextView manageFavs = root.findViewById(R.id.settingsManageFavs);
 
         manageFavs.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +106,10 @@ public class SettingsFragment extends Fragment {
         });
     }
 
-    private void setupAboutDeveloper(){
+    /**
+     * redirects user to developer's information page
+     */
+    private void setupAboutDeveloper() {
         TextView aboutView = root.findViewById(R.id.aboutDeveloper);
         aboutView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +120,10 @@ public class SettingsFragment extends Fragment {
         });
     }
 
-    private void setupPlayStoreRedirect(){
+    /**
+     * redirects user to the app's playstore page
+     */
+    private void setupPlayStoreRedirect() {
         TextView playStore = root.findViewById(R.id.viewOnPlayStore);
         playStore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +134,10 @@ public class SettingsFragment extends Fragment {
         });
     }
 
-    private void setupContributions(){
+    /**
+     * redirects user to the github page for the project's repository
+     */
+    private void setupContributions() {
         TextView contributions = root.findViewById(R.id.contributions);
         contributions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +148,10 @@ public class SettingsFragment extends Fragment {
         });
     }
 
-    private void setupAcknowledgments(){
+    /**
+     * redirects user to the acknowledgements and mentions page
+     */
+    private void setupAcknowledgments() {
         TextView acks = root.findViewById(R.id.ackMentions);
         acks.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +162,10 @@ public class SettingsFragment extends Fragment {
         });
     }
 
-    private void setupSharing(){
+    /**
+     * allows the user to share the app with others
+     */
+    private void setupSharing() {
         TextView share = root.findViewById(R.id.shareApp);
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,21 +180,27 @@ public class SettingsFragment extends Fragment {
         });
     }
 
-    private void setupLogout(){
+    /**
+     * logout from the app
+     */
+    private void setupLogout() {
         TextView logout = root.findViewById(R.id.logout);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SignInActivity.class);
-                intent.putExtra(Constants.SIGN_OUT, Constants.SIGN_OUT);
+                intent.putExtra(Values.SIGN_OUT, Values.SIGN_OUT);
                 startActivity(intent);
                 getActivity().finishAffinity();
             }
         });
     }
 
-    private void setupShowHelper(){
+    /**
+     * to view the walkthrough of the app
+     */
+    private void setupShowHelper() {
         TextView showHelper = root.findViewById(R.id.showHelper);
 
         showHelper.setOnClickListener(new View.OnClickListener() {

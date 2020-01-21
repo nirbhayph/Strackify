@@ -1,12 +1,21 @@
 package com.sportstracking.strackify.ui.pastevents;
 
+/**
+ * strackify: past events fragment
+ * has observable attached to retrieve data updates from the view model
+ * populates past events in a recycler view
+ * populates favorites in a story like recycler view for the user to choose from
+ *
+ * @author Nirbhay Ashok Pherwani
+ * email: np5318@rit.edu
+ * profile: https://nirbhay.me
+ */
+
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,19 +32,15 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.sportstracking.strackify.R;
 import com.sportstracking.strackify.adapter.FavoriteTeamsAdapter;
 import com.sportstracking.strackify.adapter.PastEventsAdapter;
 import com.sportstracking.strackify.model.PastEvent;
 import com.sportstracking.strackify.model.Team;
 import com.sportstracking.strackify.ui.SportSelection;
-import com.sportstracking.strackify.utility.Constants;
+import com.sportstracking.strackify.utility.Values;
 import com.sportstracking.strackify.utility.VolleyService;
-
 import java.util.ArrayList;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PastEventsFragment extends Fragment {
 
@@ -57,10 +61,9 @@ public class PastEventsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         pastEventsViewModel =
                 ViewModelProviders.of(this).get(PastEventsViewModel.class);
-        if(getView()!=null){
+        if (getView() != null) {
             root = getView();
-        }
-        else{
+        } else {
             root = inflater.inflate(R.layout.fragment_past_events, container, false);
             setup();
         }
@@ -73,15 +76,23 @@ public class PastEventsFragment extends Fragment {
         setup();
     }
 
-    public void setup(){
+    /**
+     * makes calls to data observer and setting the data view function
+     */
+    public void setup() {
         setHasOptionsMenu(true);
         setupDataView();
         setupDataObserver();
     }
 
-    private void setupDataView(){
+    /**
+     * sets up both the recycler views
+     * sets the layout for both
+     * on pressing add user is taken through the process of adding another favorite
+     */
+    private void setupDataView() {
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("  Past Events");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("  Past Events");
 
         pastEventsRecyclerView = root.findViewById(R.id.past_events_recycler_view);
         pastEventsRecyclerView.setHasFixedSize(true);
@@ -107,35 +118,45 @@ public class PastEventsFragment extends Fragment {
 
     }
 
-    public void makeNewRequest(String teamId, String teamName){
-        SharedPreferences sharedPref = getActivity().getApplicationContext().getSharedPreferences(Constants.LATEST_FAV_TEAM, Context.MODE_PRIVATE);
+    /**
+     * makes a request to the view model for obtaining data for a
+     * particular favorite team clicked by the user
+     * @param teamId team id which events are required
+     * @param teamName team name for which events are required
+     */
+    public void makeNewRequest(String teamId, String teamName) {
+        SharedPreferences sharedPref = getActivity().getApplicationContext().getSharedPreferences(Values.LATEST_FAV_TEAM, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(Constants.LATEST_FAV_TEAM, teamId);
-        editor.putString(Constants.LATEST_FAV_TEAM_NAME, teamName);
+        editor.putString(Values.LATEST_FAV_TEAM, teamId);
+        editor.putString(Values.LATEST_FAV_TEAM_NAME, teamName);
         editor.commit();
 
         pastEventsViewModel.makeDataRequest();
     }
 
-    public void setupDataObserver(){
+    /**
+     * sets up the data observer for getting the past events, favorites and team name to set the header
+     * also sets an observer for no data found for an event. changes ui accordingly
+     */
+    public void setupDataObserver() {
 
         pastEventsViewModel.getPastEvents().observe(this, new Observer<ArrayList<PastEvent>>() {
             @Override
-            public void onChanged(@Nullable ArrayList<PastEvent> pastEvents ) {
+            public void onChanged(@Nullable ArrayList<PastEvent> pastEvents) {
                 updatePastEvents(pastEvents);
             }
         });
 
         pastEventsViewModel.getFavorites().observe(this, new Observer<ArrayList<Team>>() {
             @Override
-            public void onChanged(@Nullable ArrayList<Team> teams ) {
+            public void onChanged(@Nullable ArrayList<Team> teams) {
                 updateFavorites(teams);
             }
         });
 
         pastEventsViewModel.getTeamName().observe(this, new Observer<String>() {
             @Override
-            public void onChanged(@Nullable String team ) {
+            public void onChanged(@Nullable String team) {
                 TextView title = root.findViewById(R.id.teamsHeaderText);
                 title.setText(team);
             }
@@ -143,15 +164,14 @@ public class PastEventsFragment extends Fragment {
 
         pastEventsViewModel.getNotFoundStatus().observe(this, new Observer<Boolean>() {
             @Override
-            public void onChanged(@Nullable Boolean status ) {
+            public void onChanged(@Nullable Boolean status) {
                 TextView notFoundMessage = root.findViewById(R.id.notFoundMessage);
                 ImageView notFoundImage = root.findViewById(R.id.notFoundImage);
 
-                if(status){
+                if (status) {
                     notFoundMessage.setVisibility(View.VISIBLE);
                     notFoundImage.setVisibility(View.VISIBLE);
-                }
-                else{
+                } else {
                     notFoundImage.setVisibility(View.GONE);
                     notFoundMessage.setVisibility(View.GONE);
                 }
@@ -159,30 +179,50 @@ public class PastEventsFragment extends Fragment {
         });
     }
 
-    public void updateFavorites(ArrayList<Team> favorites){
+
+    /**
+     * stores the favorites
+     * makes a call to update the favorites bar
+     * @param favorites list of favorites selected by user
+     */
+    public void updateFavorites(ArrayList<Team> favorites) {
         this.favorites = favorites;
         updateFavoritesBar();
     }
 
-
-    public void updatePastEvents(ArrayList<PastEvent> pastEvents){
+    /**
+     * stores the past events
+     * makes a call to update the ui with the past events stores
+     * @param pastEvents past events data
+     */
+    public void updatePastEvents(ArrayList<PastEvent> pastEvents) {
         this.pastEvents = pastEvents;
         updateUI();
     }
 
-    public void updateUI(){
-        volleyService = new VolleyService(getActivity(), Constants.PAST_EVENTS_DISPLAY);
-
+    /**
+     * sets the adapter for the recycler view with the past events data
+     */
+    public void updateUI() {
+        volleyService = new VolleyService(getActivity(), Values.PAST_EVENTS_DISPLAY);
         pastEventsAdapter = new PastEventsAdapter(getActivity(), pastEvents, volleyService);
         pastEventsRecyclerView.setAdapter(pastEventsAdapter);
 
     }
 
-    public void updateFavoritesBar(){
-        favoriteTeamsAdapter = new FavoriteTeamsAdapter(getActivity(), favorites, new VolleyService(getActivity(), Constants.FAV_TEAMS), this, Constants.PAST_EVENTS);
+    /**
+     * sets the adapter for the recycler view with the favorites data
+     */
+    public void updateFavoritesBar() {
+        favoriteTeamsAdapter = new FavoriteTeamsAdapter(getActivity(), favorites, new VolleyService(getActivity(), Values.FAV_TEAMS), this, Values.PAST_EVENTS);
         favoriteTeamsRecyclerView.setAdapter(favoriteTeamsAdapter);
     }
 
+    /**
+     * for searching from events populated for the selected favorite
+     * @param menu menu on action bar
+     * @return return true or false after menu inflated
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -205,8 +245,7 @@ public class PastEventsFragment extends Fragment {
             public boolean onQueryTextChange(String newText) {
                 try {
                     pastEventsAdapter.getFilter().filter(newText);
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     return false;
                 }
                 return false;

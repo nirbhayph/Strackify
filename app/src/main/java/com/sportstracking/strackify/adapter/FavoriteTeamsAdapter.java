@@ -13,13 +13,11 @@ import com.sportstracking.strackify.model.Team;
 import com.sportstracking.strackify.ui.aboutteam.AboutTeamFragment;
 import com.sportstracking.strackify.ui.pastevents.PastEventsFragment;
 import com.sportstracking.strackify.ui.upcomingevents.UpcomingEventsFragment;
-import com.sportstracking.strackify.utility.Constants;
+import com.sportstracking.strackify.utility.Values;
 import com.sportstracking.strackify.utility.VolleyService;
 
 
 import java.util.ArrayList;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FavoriteTeamsAdapter extends RecyclerView.Adapter<FavoriteTeamsAdapter.MyViewHolder> {
     private ArrayList<Team> teamsData;
@@ -52,7 +50,7 @@ public class FavoriteTeamsAdapter extends RecyclerView.Adapter<FavoriteTeamsAdap
                                                                 int viewType) {
         View v;
         switch (callFrom){
-            case Constants.ABOUT_TEAM:{
+            case Values.ABOUT_TEAM:{
                 v = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.favorite_about_team_view, parent, false);
                 break;
@@ -70,7 +68,7 @@ public class FavoriteTeamsAdapter extends RecyclerView.Adapter<FavoriteTeamsAdap
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         String teamNameText = teamsData.get(position).getTeamName();
-        if(!callFrom.equals(Constants.ABOUT_TEAM)){
+        if(!callFrom.equals(Values.ABOUT_TEAM)){
             if(teamNameText.length()>10){
                 teamNameText = teamNameText.substring(0, 7) + "..";
             }         }
@@ -91,19 +89,19 @@ public class FavoriteTeamsAdapter extends RecyclerView.Adapter<FavoriteTeamsAdap
                 String teamId = teamsData.get(position).getTeamId();
 
                 switch(callFrom){
-                    case Constants
+                    case Values
                             .PAST_EVENTS: {
                         PastEventsFragment pastEventsFragment = (PastEventsFragment) reference;
                         pastEventsFragment.makeNewRequest(teamId, teamName);
                         break;
                     }
-                    case Constants
+                    case Values
                             .UPCOMING_EVENTS: {
                         UpcomingEventsFragment upcomingEventsFragment = (UpcomingEventsFragment) reference;
                         upcomingEventsFragment.makeNewRequest(teamId, teamName);
                         break;
                     }
-                    case Constants.ABOUT_TEAM: {
+                    case Values.ABOUT_TEAM: {
                         AboutTeamFragment aboutTeamFragment = (AboutTeamFragment) reference;
                         aboutTeamFragment.showTeamDetails(teamsData.get(position));
                         break;

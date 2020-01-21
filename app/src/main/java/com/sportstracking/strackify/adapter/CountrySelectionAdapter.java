@@ -7,14 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sportstracking.strackify.R;
 import com.sportstracking.strackify.ui.TeamSelection;
 import com.sportstracking.strackify.model.Country;
-import com.sportstracking.strackify.utility.Constants;
+import com.sportstracking.strackify.utility.Values;
 import com.vanniktech.emoji.EmojiTextView;
 
 import java.util.ArrayList;
@@ -56,8 +55,8 @@ public class CountrySelectionAdapter extends RecyclerView.Adapter<CountrySelecti
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity, TeamSelection.class);
-                intent.putExtra(Constants.SPORTS_SELECTION, selectedSport);
-                intent.putExtra(Constants.COUNTRIES_SELECTION, countriesData.get(position).getCountryName());
+                intent.putExtra(Values.SPORTS_SELECTION, selectedSport);
+                intent.putExtra(Values.COUNTRIES_SELECTION, countriesData.get(position).getCountryName());
                 activity.startActivity(intent);
             }
         });

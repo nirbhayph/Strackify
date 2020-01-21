@@ -1,5 +1,16 @@
 package com.sportstracking.strackify.ui;
 
+/**
+ * strackify: team selection
+ * uses the sport and country selected to populate
+ * the teams in the recyceler view
+ * maintains another favorite recycler view to manage user's favorites
+ *
+ * @author Nirbhay Ashok Pherwani
+ * email: np5318@rit.edu
+ * profile: https://nirbhay.me
+ */
+
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -11,24 +22,20 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.sportstracking.strackify.R;
 import com.sportstracking.strackify.adapter.TeamSelectionAdapter;
 import com.sportstracking.strackify.adapter.TeamsSelectedAdapter;
 import com.sportstracking.strackify.model.Team;
-import com.sportstracking.strackify.utility.Constants;
+import com.sportstracking.strackify.utility.Values;
 import com.sportstracking.strackify.utility.VolleyService;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -37,7 +44,7 @@ import java.util.Set;
 
 public class TeamSelection extends AppCompatActivity {
 
-    private RecyclerView teamSelectionRecyclerView, teamSelectedRecyclerView;
+    private RecyclerView teamSelectionRecyclerView, teamSelectedRecyclerView; // for showing searched teams and already selected favorites;
     private TeamSelectionAdapter teamSelectionAdapter;
     private TeamsSelectedAdapter teamSelectedAdapter;
     private VolleyService volleyService;
@@ -59,16 +66,23 @@ public class TeamSelection extends AppCompatActivity {
         getTeams();
     }
 
-    private void getPreviousUserSelections(){
-        if(getIntent().hasExtra(Constants.SPORTS_SELECTION)){
-            selectedSport = getIntent().getStringExtra(Constants.SPORTS_SELECTION);
+    /**
+     * Sets the country and sport selected by the user
+     */
+    private void getPreviousUserSelections() {
+        if (getIntent().hasExtra(Values.SPORTS_SELECTION)) {
+            selectedSport = getIntent().getStringExtra(Values.SPORTS_SELECTION);
         }
-        if(getIntent().hasExtra(Constants.COUNTRIES_SELECTION)){
-            selectedCountry = getIntent().getStringExtra(Constants.COUNTRIES_SELECTION);
+        if (getIntent().hasExtra(Values.COUNTRIES_SELECTION)) {
+            selectedCountry = getIntent().getStringExtra(Values.COUNTRIES_SELECTION);
         }
     }
 
-    private void setupDataView(){
+    /**
+     * instantiates the teams and teams selected recycler view
+     * sets up the layout manager for both
+     */
+    private void setupDataView() {
         // For displaying teams to select
         teamSelectionRecyclerView = findViewById(R.id.team_selection_recycler_view);
         teamSelectionRecyclerView.setHasFixedSize(true);
@@ -85,18 +99,26 @@ public class TeamSelection extends AppCompatActivity {
         teamSelectedRecyclerView.setLayoutManager(linearLayoutManager);
     }
 
-    private void setupService(){
-        volleyService = new VolleyService(this, Constants.TEAMS_SELECTION);
+    /**
+     * sets up the volley service instance
+     */
+    private void setupService() {
+        volleyService = new VolleyService(this, Values.TEAMS_SELECTION);
     }
 
-    private void setupSelectedTeams(){
+    /**
+     * uses shared preferences to retrieve previously stores
+     * favorite teams from the string set. uses gson to get the object for the team
+     * sets the adpater with that data
+     */
+    private void setupSelectedTeams() {
         selectedTeamsData = new ArrayList<>();
         selectedTeamIds = new ArrayList<>();
-        SharedPreferences sharedPreferencesFavorite = getSharedPreferences(Constants.FAV_TEAMS, Context.MODE_PRIVATE);
-        Set<String> selectedTeams = new LinkedHashSet<>(sharedPreferencesFavorite.getStringSet(Constants.FAV_TEAMS, new LinkedHashSet<String>()));
+        SharedPreferences sharedPreferencesFavorite = getSharedPreferences(Values.FAV_TEAMS, Context.MODE_PRIVATE);
+        Set<String> selectedTeams = new LinkedHashSet<>(sharedPreferencesFavorite.getStringSet(Values.FAV_TEAMS, new LinkedHashSet<String>()));
         Gson gson = new Gson();
 
-        for(String teamJson : selectedTeams){
+        for (String teamJson : selectedTeams) {
             Team team = gson.fromJson(teamJson, Team.class);
             selectedTeamsData.add(team);
             selectedTeamIds.add(team.getTeamId());
@@ -108,13 +130,17 @@ public class TeamSelection extends AppCompatActivity {
 
     }
 
-    public void updateSelectedTeams(Set<String> selectedTeams){
+    /**
+     * updates the favorites bar with new selections
+     * @param selectedTeams string set of new favorites to populate
+     */
+    public void updateSelectedTeams(Set<String> selectedTeams) {
         Gson gson = new Gson();
         selectedTeamsData.clear();
         List<String> teamsJson = new ArrayList<>(selectedTeams);
         Collections.reverse(teamsJson);
 
-        for(String teamJson : teamsJson){
+        for (String teamJson : teamsJson) {
             Team team = gson.fromJson(teamJson, Team.class);
             selectedTeamsData.add(team);
         }
@@ -123,20 +149,30 @@ public class TeamSelection extends AppCompatActivity {
 
     }
 
-    private void getTeams(){
-        volleyService.makeRequest(Constants.TEAMS + Constants.SPORT_IDENTIFIER + selectedSport + Constants.COUNTRY_IDENTIFIER + selectedCountry);
+    /**
+     * volley service request to get the teams for options choosen by user
+     */
+    private void getTeams() {
+        volleyService.makeRequest(Values.TEAMS + Values.SPORT_IDENTIFIER + selectedSport + Values.COUNTRY_IDENTIFIER + selectedCountry);
     }
 
-    public void updateUI(JSONObject response){
+    /**
+     * updates the ui with the response obtained from the api
+     * populates it with teams user can select
+     * covers a range of properties
+     * sets the adapter. displays a message if no results found
+     * @param response
+     */
+    public void updateUI(JSONObject response) {
 
         ArrayList<Team> teams = new ArrayList<>();
-        try{
+        try {
             JSONArray teamsData = (JSONArray) response.get("teams");
             TextView notFoundTextView = findViewById(R.id.notFoundMessage);
             notFoundTextView.setVisibility(View.INVISIBLE);
-            for(int counter = 0; counter<teamsData.length(); counter++){
+            for (int counter = 0; counter < teamsData.length(); counter++) {
                 JSONObject teamItem = (JSONObject) teamsData.get(counter);
-                if(!selectedTeamIds.contains(teamItem.getString("idTeam"))) {
+                if (!selectedTeamIds.contains(teamItem.getString("idTeam"))) {
                     Team team = new Team();
                     team.setTeamName(teamItem.getString("strTeam"));
                     team.setTeamBadge(teamItem.getString("strTeamBadge"));
@@ -161,8 +197,7 @@ public class TeamSelection extends AppCompatActivity {
             }
             teamSelectionAdapter = new TeamSelectionAdapter(this, teams, volleyService);
             teamSelectionRecyclerView.setAdapter(teamSelectionAdapter);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             TextView notFoundTextView = findViewById(R.id.notFoundMessage);
             notFoundTextView.setVisibility(View.VISIBLE);
             ImageView oopsImage = findViewById(R.id.notFoundImage);
@@ -171,6 +206,10 @@ public class TeamSelection extends AppCompatActivity {
         }
     }
 
+    /**
+     * adjusts both the recycler views if needed if a favorite is removed
+     * @param team
+     */
     public void adjustRemovedFavorite(Team team) {
         if (selectedCountry.equals(team.getTeamCountry()) && selectedSport.equals(team.getSportName())) {
             teamSelectionAdapter.adjustRemovedFavorite(team);
@@ -178,19 +217,24 @@ public class TeamSelection extends AppCompatActivity {
         }
     }
 
-    public void updateFAB(){
-        SharedPreferences sharedPreferencesFavorite = getSharedPreferences(Constants.FAV_TEAMS, Context.MODE_PRIVATE);
-        Set<String> selectedTeams = new LinkedHashSet<>(sharedPreferencesFavorite.getStringSet(Constants.FAV_TEAMS, new LinkedHashSet<String>()));
-        if(selectedTeams.size()>0){
+    /**
+     * hides the move forward button if there is no favorite selected. shows it if there is atleast one.
+     */
+    public void updateFAB() {
+        SharedPreferences sharedPreferencesFavorite = getSharedPreferences(Values.FAV_TEAMS, Context.MODE_PRIVATE);
+        Set<String> selectedTeams = new LinkedHashSet<>(sharedPreferencesFavorite.getStringSet(Values.FAV_TEAMS, new LinkedHashSet<String>()));
+        if (selectedTeams.size() > 0) {
             moveNext.show();
-        }
-        else{
+        } else {
             moveNext.hide();
         }
 
     }
 
-    public void setupFAB(){
+    /**
+     * sets the floating action button to move to home activity if clicked
+     */
+    public void setupFAB() {
         moveNext = findViewById(R.id.moveNextFAB);
         moveNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,6 +246,11 @@ public class TeamSelection extends AppCompatActivity {
         updateFAB();
     }
 
+    /**
+     * for searching from teams populated for the particular sport and country selected
+     * @param menu menu on action bar
+     * @return return true or false after menu inflated
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -224,8 +273,8 @@ public class TeamSelection extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 try {
                     teamSelectionAdapter.getFilter().filter(newText);
-                }catch (Exception e){
-                    Toast.makeText(getApplicationContext(),"Nothing to search!", Toast.LENGTH_SHORT);
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Nothing to search!", Toast.LENGTH_SHORT);
                 }
                 return false;
             }
