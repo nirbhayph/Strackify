@@ -4,25 +4,6 @@
 
 - This project is aimed at providing users with a way to manage a number of their favorite team's events at the switch of a click, just like you would in a story now a days present on any social platform. Users are given options to manage their favorites by selecting from number of sports teams spread out around the world. You will be able to view highlight and upcoming events for the team. This app is in the idea stage. Ideas, criticisim, suggestions are always welcome. Feel free to provide feedback on the play store. 
 
-- Here are some screenshots from the app. 
-
-![Sign In](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200120-121044.jpg)
-![Walkthrough1](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153438.jpg)
-![Walkthrough2](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153442.jpg)
-![Walkthrough3](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153447.jpg)
-![Walkthrough4](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153451.jpg)
-![Walkthrough5](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153456.jpg)
-![Past Events](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153127.jpg)
-![Upcoming Events](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153154.jpg)
-![About Team 1](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153106.jpg)
-![About Team 2](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153031.jpg)
-![Select Sport](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153206.jpg)
-![Select Country](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153247.jpg)
-![Select Team](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153404.jpg)
-![Settings](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153046.jpg)
-![Another Sign In](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153909.jpg)
-
-
 - The API is available at https://www.thesportsdb.com/api.php
 
 - Play Store Link - 
@@ -81,3 +62,23 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 - @unsplash - https://unsplash.com/
 - @snap2html - https://www.rlvision.com/snap2html/about.php
 - @sportsdb - https://www.thesportsdb.com
+
+## App Screenshots:
+
+- Here are some screenshots from the app. 
+
+<a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200120-121044.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200120-121044.jpg" align="left" height="450" width="270" alt="Sign In"></a>
+<a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153438.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153438.jpg" align="left" height="450" width="270" alt="Walkthrough1"></a>
+<a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153442.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153442.jpg" align="left" height="450" width="270" alt="Walkthrough2"></a>
+<a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153447.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153447.jpg" align="left" height="450" width="270" alt="Walkthrough3"></a>
+<a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153451.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153451.jpg" align="left" height="450" width="270" alt="Walkthrough4"></a>
+<a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153456.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153456.jpg" align="left" height="450" width="270" alt="Walkthrough5"></a>
+<a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153127.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153127.jpg" align="left" height="450" width="270" alt="Past Events"></a>
+<a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153154.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153154.jpg" align="left" height="450" width="270" alt="Upcoming Events"></a>
+<a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153106.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153106.jpg" align="left" height="450" width="270" alt="About Team 1"></a>
+<a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153031.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153031.jpg" align="left" height="450" width="270" alt="About Team 2"></a>
+<a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153206.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153206.jpg" align="left" height="450" width="270" alt="Select Sport"></a>
+<a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153247.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153247.jpg" align="left" height="450" width="270" alt="Select Country"></a>
+<a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153404.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153404.jpg" align="left" height="450" width="270" alt="Select Team"></a>
+<a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153046.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153046.jpg" align="left" height="450" width="270" alt="Settings"></a>
+<a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153909.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153909.jpg" align="left" height="450" width="270" alt="Another Sign In"></a>
