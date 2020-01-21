@@ -12,9 +12,9 @@
 
 - Landing Page Link - 
 
-- Link to Project Structure - 
+- Link to Project Structure - https://nirbhay.me/Strackify/structure.html
 
-- Link to JavaDoc - 
+- Link to JavaDoc - https://nirbhay.me/Strackify/javadoc/
 
 - Link to Trello - https://trello.com/b/os8Qecfb/strackify
 
@@ -51,7 +51,7 @@ For developers out there, if you wish to contribute to the project, feel free to
 This project is licensed under the MIT License - see the LICENSE.md file for details
 
 ## Developer:
-- @nirbhayph - https://github.com/nirbhayph | https://linkedin.com/in/nirbhaypherwani
+- @nirbhayph - https://github.com/nirbhayph | https://linkedin.com/in/nirbhaypherwani | https://nirbhay.me
 
 ## Acknowledgements and Mentions:
 
