@@ -66,34 +66,27 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 ## App Screenshots:
 
 - Here are some screenshots from the app. 
-<p>
+<pre>
 <a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200120-121044.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200120-121044.jpg" align="left" height="540" width="270" alt="Sign In"></a>
 <a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153438.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153438.jpg" align="left" height="540" width="270" alt="Walkthrough1"></a>
-</p>
-<p>
+<br/>
 <a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153442.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153442.jpg" align="left" height="540" width="270" alt="Walkthrough2"></a>
 <a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153447.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153447.jpg" align="left" height="540" width="270" alt="Walkthrough3"></a>
-</p>
-<p>
+<br/>
 <a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153451.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153451.jpg" align="left" height="540" width="270" alt="Walkthrough4"></a>
 <a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153456.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153456.jpg" align="left" height="540" width="270" alt="Walkthrough5"></a>
-</p>
-<p>
+<br/>
 <a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153127.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153127.jpg" align="left" height="540" width="270" alt="Past Events"></a>
 <a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153154.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153154.jpg" align="left" height="540" width="270" alt="Upcoming Events"></a>
-</p>
-<p>
+<br/>
 <a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153106.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153106.jpg" align="left" height="540" width="270" alt="About Team 1"></a>
 <a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153031.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153031.jpg" align="left" height="540" width="270" alt="About Team 2"></a>
-</p>
-<p>
+<br/>
 <a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153206.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153206.jpg" align="left" height="540" width="270" alt="Select Sport"></a>
 <a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153247.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153247.jpg" align="left" height="540" width="270" alt="Select Country"></a>
-</p>
-<p>
+<br/>
 <a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153404.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153404.jpg" align="left" height="540" width="270" alt="Select Team"></a>
 <a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153046.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153046.jpg" align="left" height="540" width="270" alt="Settings"></a>
-</p>
-<p>
+<br/>
 <a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153909.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153909.jpg" align="left" height="540" width="270" alt="Another Sign In"></a>
-</p>
+</pre>
