@@ -6,20 +6,21 @@
 
 - Here are some screenshots from the app. 
 
-![Sign In]()
-![Walkthrough1]()
-![Walkthrough2]()
-![Walkthrough3]()
-![Walkthrough4]()
-![Walkthrough5]()
-![Past Events]()
-![Upcoming Events]()
-![About Team 1]()
-![About Team 2]()
-![Select Sport]()
-![Select Country]()
-![Select Team]()
-![Settings]()
+![Sign In](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200120-121044.jpg)
+![Walkthrough1](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153438.jpg)
+![Walkthrough2](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153442.jpg)
+![Walkthrough3](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153447.jpg)
+![Walkthrough4](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153451.jpg)
+![Walkthrough5](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153456.jpg)
+![Past Events](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153127.jpg)
+![Upcoming Events](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153154.jpg)
+![About Team 1](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153106.jpg)
+![About Team 2](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153031.jpg)
+![Select Sport](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153206.jpg)
+![Select Country](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153247.jpg)
+![Select Team](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153404.jpg)
+![Settings](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153046.jpg)
+![Another Sign In](https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153909.jpg)
 
 
 - The API is available at https://www.thesportsdb.com/api.php
