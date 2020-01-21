@@ -67,7 +67,7 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 
 - Here are some screenshots from the app. 
 
-<a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200120-121044.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200120-121044.jpg" align="left" height="470" width="270" alt="Sign In"></a>
+<a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200120-121044.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200120-121044.jpg" align="left" height="490" width="270" alt="Sign In"></a>
 <a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153438.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153438.jpg" align="left" height="470" width="270" alt="Walkthrough1"></a>
 
 <a href="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153442.jpg"><img src="https://github.com/nirbhayph/Strackify/blob/master/screenshots/Screenshot_20200121-153442.jpg" align="left" height="470" width="270" alt="Walkthrough2"></a>
