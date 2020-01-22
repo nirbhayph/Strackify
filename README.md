@@ -1,6 +1,6 @@
-# <img src="https://github.com/nirbhayph/Strackify/blob/master/app/src/main/res/drawable/strackify_playstore_512.png" width="60" height="60"> <b style="font-size: 60px">Strackify (Built for Android)</b>
+# Strackify (Built for Android)
 
-
+<img src="https://github.com/nirbhayph/Strackify/blob/master/app/src/main/res/drawable/strackify_playstore_512.png" width="512" height="512">
 
 - This repository contains the work done for developing the Strackify (Sports Tracking) app using data obtained from the SportsDB API. 
 
