@@ -27,6 +27,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ShareCompat;
@@ -125,11 +127,16 @@ public class SettingsFragment extends Fragment {
      */
     private void setupPlayStoreRedirect() {
         TextView playStore = root.findViewById(R.id.viewOnPlayStore);
+        final String url = "";
         playStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://google.com/"));
-                startActivity(browserIntent);
+                try {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(browserIntent);
+                } catch(Exception e){
+                    Toast.makeText(getActivity().getApplicationContext(), "App in publishing state!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -174,7 +181,7 @@ public class SettingsFragment extends Fragment {
                         .setType("text/plain")
                         .setChooserTitle("Strackify")
                         .setSubject("Share Now!")
-                        .setText("https://google.com\nPlease visit the play store link to download the Strackify app now!")
+                        .setText("The app will be available on the play store soon!")
                         .startChooser();
             }
         });
