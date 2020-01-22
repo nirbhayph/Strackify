@@ -10,7 +10,7 @@
  
 - Amazon App Store Link - (Send for publishing, under review)
 
-- Download Direct Link (Until app is published) - http://bit.ly/strackify
+- Download Direct Link (Until app is published) - <a href="http://bit.ly/strackify">Strackify Direct Download</a>
 
 - App Screenshots - Visit last section of this file. 
 
