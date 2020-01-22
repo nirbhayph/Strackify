@@ -8,7 +8,7 @@
 
 - Play Store Link - <b>(Sent for publishing, under review) [Stay Tuned]</b>
  
-- Amazon App Store Link - <b>(Send for publishing, under review) [Stay Tuned]</b>
+- Amazon App Store Link - <b>(Sent for publishing, under review) [Stay Tuned]</b>
 
 - Download Direct Link (Until app is published) - <a href="http://bit.ly/strackify" target="_blank">Strackify Direct Download</a>
 
