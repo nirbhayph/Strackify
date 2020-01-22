@@ -1,5 +1,7 @@
 # Strackify (Built for Android)
 
+<img src="https://github.com/nirbhayph/Strackify/blob/master/app/src/main/res/drawable/strackify_playstore_512.png" width="200" height="200">
+
 - This repository contains the work done for developing the Strackify (Sports Tracking) app using data obtained from the SportsDB API. 
 
 - This project is aimed at providing users with a way to manage a number of their favorite teams and their events at the press of a click, just like you would in a story now-a-days present on any social platform. Users are given options to manage their favorites by selecting from number of sports teams spread out around the world. You will be able to view highlights and upcoming events for the team. This app is in the idea stage. Ideas, criticisim, suggestions are always welcome. Feel free to provide feedback on the play store. 
