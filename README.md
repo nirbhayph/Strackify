@@ -6,9 +6,11 @@
 
 - The API is available at https://www.thesportsdb.com/api.php
 
-- Play Store Link - 
+- Play Store Link - (Sent for publishing, under review)
+ 
+- Amazon App Store Link - (Send for publishing, under review)
 
-- Landing Page Link - 
+- Download Direct Link (Until app is published) - ![Direct Download Link](http://bit.ly/strackify)
 
 - App Screenshots - Visit last section of this file. 
 
