@@ -16,7 +16,7 @@
 
 - Link to Project Structure - https://nirbhay.me/Strackify/structure.html
 
-- Link to JavaDoc - https://nirbhay.me/Strackify/javadoc/
+- Link to JavaDoc - https://nirbhay.me/Strackify/javadoc/ <b>(Clone the repository and run this locally if not working on github pages)</b>
 
 - Link to Trello - https://trello.com/b/os8Qecfb/strackify
 
