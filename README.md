@@ -1,4 +1,4 @@
-# <img src="https://github.com/nirbhayph/Strackify/blob/master/app/src/main/res/drawable/strackify_playstore_512.png" width="60" height="60"> Strackify (Built for Android)
+# <img src="https://github.com/nirbhayph/Strackify/blob/master/app/src/main/res/drawable/strackify_playstore_512.png" width="60" height="60"> <b style="font-size: 60px">Strackify (Built for Android)</b>
 
 
 
