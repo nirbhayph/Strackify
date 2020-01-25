@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "478533617014-bac7ntpddeacgoa05i2d0e5mdih79nv4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sportstracking.strackify",
+            "certificate_hash": "7d4f60f854849fd0f40cee12fd891fb161506f6f"
+          }
+        },
+        {
           "client_id": "478533617014-02sas7hm2ml37ta6s0f1jia2akustlvv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

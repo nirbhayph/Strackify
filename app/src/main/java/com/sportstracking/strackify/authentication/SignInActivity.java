@@ -224,9 +224,6 @@ public class SignInActivity extends AppCompatActivity {
                 intent = new Intent(SignInActivity.this, Home.class);
             }
             startActivity(intent);
-        } else {
-            // message for user if failed to authenticate
-            Toast.makeText(getApplicationContext(), "Unable to sign you in currently!", Toast.LENGTH_SHORT).show();
         }
     }
 

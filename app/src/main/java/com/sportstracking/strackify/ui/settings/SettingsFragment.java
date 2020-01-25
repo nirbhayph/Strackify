@@ -127,7 +127,7 @@ public class SettingsFragment extends Fragment {
      */
     private void setupPlayStoreRedirect() {
         TextView playStore = root.findViewById(R.id.viewOnPlayStore);
-        final String url = "";
+        final String url = "https://play.google.com/store/apps/details?id=com.sportstracking.strackify";
         playStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,7 +181,7 @@ public class SettingsFragment extends Fragment {
                         .setType("text/plain")
                         .setChooserTitle("Strackify")
                         .setSubject("Share Now!")
-                        .setText("The app will be available on the play store soon!")
+                        .setText("Visit the play store to download now! https://play.google.com/store/apps/details?id=com.sportstracking.strackify")
                         .startChooser();
             }
         });
