@@ -1,14 +1,16 @@
 # Strackify (Built for Android)
 
-- This repository contains the work done for developing the Strackify (Sports Tracking) using data obtained from the SportsDB API. 
+<center><img src="https://github.com/nirbhayph/Strackify/blob/master/app/src/main/res/drawable/strackify_playstore_512.png" width="206" height="206"></center>
+
+- This repository contains the work done for developing the Strackify (Sports Tracking) app using data obtained from the SportsDB API. 
 
 - This project is aimed at providing users with a way to manage a number of their favorite teams and their events at the press of a click, just like you would in a story now-a-days present on any social platform. Users are given options to manage their favorites by selecting from number of sports teams spread out around the world. You will be able to view highlights and upcoming events for the team. This app is in the idea stage. Ideas, criticisim, suggestions are always welcome. Feel free to provide feedback on the play store. 
 
 - The API is available at https://www.thesportsdb.com/api.php
 
-- Play Store Link - (Sent for publishing, under review)
+- Play Store Link - <b>(Sent for publishing, under review) [Stay Tuned]</b>
  
-- Amazon App Store Link - (Send for publishing, under review)
+- Amazon App Store Link - <b>(Sent for publishing, under review) [Stay Tuned]</b>
 
 - Download Direct Link (Until app is published) - <a href="http://bit.ly/strackify" target="_blank">Strackify Direct Download</a>
 
@@ -16,7 +18,7 @@
 
 - Link to Project Structure - https://nirbhay.me/Strackify/structure.html
 
-- Link to JavaDoc - https://nirbhay.me/Strackify/javadoc/
+- Link to JavaDoc - https://nirbhay.me/Strackify/javadoc/ <b>(Clone the repository and run this locally if not working on github pages)</b>
 
 - Link to Trello - https://trello.com/b/os8Qecfb/strackify
 
