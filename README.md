@@ -8,10 +8,8 @@
 
 - The API is available at https://www.thesportsdb.com/api.php
 
-- Play Store Link - <b>(Sent for publishing, under review) [Stay Tuned]</b>
+- Play Store Link - https://play.google.com/store/apps/details?id=com.sportstracking.strackify
  
-- Amazon App Store Link - <b>(Sent for publishing, under review) [Stay Tuned]</b>
-
 - Download Direct Link (Until app is published) - <a href="http://bit.ly/strackify" target="_blank">Strackify Direct Download</a>
 
 - App Screenshots - Visit last section of this file. 
